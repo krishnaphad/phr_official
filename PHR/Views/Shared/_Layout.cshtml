@@ -3,26 +3,37 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PHR</title>
+    <title> Prosperspective HR Solitions</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/font-awesome-icon/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PHR</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">PHR</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" style="float:right;">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Careers">Careers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
                         </li>
                     </ul>
                 </div>
@@ -35,14 +46,64 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - PHR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+       
+<footer class="mainfooter bg-dark" role="contentinfo">
+  <div class="footer-middle">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4 class="white-color">Home</h4>
+          <ul class="list-unstyled">
+            <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="Home">Home</a></li>            
+          </ul>
         </div>
-    </footer>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4 class="white-color">About Us</h4>
+          <ul class="list-unstyled">
+            <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4 class="white-color">Contact Us</h4>
+          <ul class="list-unstyled">
+            <li><a class="green-color" style="color:lightblue" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+    	<div class="col-md-3">
+    		<h4 class="white-color">Follow Us</h4>
+            <ul class="social-network social-circle">
+             <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a></li>
+             <li><a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a></li>
+             <li><a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a></li>
+             <li><a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
+            </ul>				
+		</div>
+    </div>
+	<div class="row">
+		<div class="col-md-12 copy">
+			<p class="text-center green-color">&copy; Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions. </p>
+		</div>
+	</div>
+
+
+  </div>
+  </div>
+</footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/scripts-all.js"></script>
+    <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -18,12 +18,12 @@ namespace PHR.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Home()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AboutUs()
         {
             return View();
         }
@@ -34,7 +34,17 @@ namespace PHR.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult AboutUs()
+        public IActionResult Careers()
+        {
+            return View();   
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        public IActionResult ApplyNow()
         {
             return View();
         }

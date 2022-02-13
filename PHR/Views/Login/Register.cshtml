@@ -1,0 +1,82 @@
+﻿@model PHR.ViewModels.Login.RegisterUserViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="h-100 gradient-form" style="background-color: #fff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+
+                                <div class="text-center">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
+                                    <h4 class="mt-1 mb-5 pb-1">We are The <b>PHR</b> Team</h4>
+                                </div>
+
+                                <form id="userRegistration">
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="userName">User Name</label><span style="color:red">*</span>
+                                        <input type="text" id="userName" class="form-control" placeholder="User Name" onkeyup="clearErrMsgForRegi(2)" asp-for="UserName"/>
+                                        <span id="userNameErr" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="email">Email</label><span style="color:red">*</span>
+                                        <input type="email" id="email" class="form-control" placeholder="Email Address" onkeyup="clearErrMsgForRegi(1)" autocomplete="off" asp-for="UserEmail"/>
+                                        <span id="userEmailErr" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="mobileNo">Mobile Number</label><span style="color:red">*</span>
+                                        <input type="tel" id="mobileNo" class="form-control" placeholder="Mobile Number" onkeyup="clearErrMsgForRegi(3)" asp-for="MobileNumber"/>
+                                        <span id="userMobileNoErr" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="gender">Gender</label><span style="color:red">*</span>
+                                        <select id="gender" class="form-control" onclick="clearErrMsgForRegi(4)" asp-for="Gender">
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <span id="userGenderErr" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="password">Password</label><span style="color:red">*</span>
+                                        <input type="password" id="password" class="form-control" placeholder="Password" onkeyup="clearErrMsgForRegi(5)" asp-for="UserPassword"/>
+                                        <span id="userPasswordErr" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="confirmPassword">Confirm Password</label><span style="color:red">*</span>
+                                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" onkeyup="clearErrMsgForRegi(6)"/>
+                                        <span id="userCPasswordErr" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="text-center pt-1 mb-5 pb-1">
+                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" id="register">Register</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <h4 class="mb-4" style="color:white;">We are more than just a company</h4>
+                                <p class="small mb-0">To Secure a responsible career opportunity to fully utilize your training and skills, while making a significant contribution to the success of the this company.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

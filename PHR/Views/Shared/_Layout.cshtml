@@ -1,13 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using PHR.ViewModels.Login;
+@using Microsoft.AspNetCore.Http
+
+@{
+    var userDetails = PHR.Session.SessionExtensions.GetObjectFromJson<LoginDetailsViewModel>(Context.Session, "UserDetails");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Prosperspective HR Solitions</title>
+    <title> @ViewData["Title"] - PHRS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/font-awesome-icon/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/cute-alert-master/style.css" />
+    <script src="~/cute-alert-master/cute-alert.js"></script>
 </head>
 <body>
     <header>
@@ -35,6 +43,13 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
                         </li>
+                        @if (userDetails != null && userDetails.UserRole == "SuperAdmin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -105,9 +120,9 @@
 	</div>
 
 
-  </div>
-  </div>
-</footer>
+            </div>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

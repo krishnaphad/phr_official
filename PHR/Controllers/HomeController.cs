@@ -11,13 +11,18 @@ namespace PHR.Controllers
 {
     public class HomeController : Controller
     {
+        #region Fileds
         private readonly ILogger<HomeController> _logger;
+        #endregion
 
+        #region Constructor
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
+        #endregion
 
+        #region Methods
         public IActionResult Home()
         {
             return View();
@@ -36,7 +41,7 @@ namespace PHR.Controllers
 
         public IActionResult Careers()
         {
-            return View();   
+            return View();
         }
 
         public IActionResult ContactUs()
@@ -48,5 +53,6 @@ namespace PHR.Controllers
         {
             return View();
         }
+        #endregion
     }
 }

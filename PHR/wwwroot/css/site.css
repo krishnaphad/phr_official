@@ -100,4 +100,11 @@ body {
 .bg-color{
     background-color:lightgray !important;
 }
+
+.spc {
+    white-space:pre;
+}
+
+
+
 /* End */

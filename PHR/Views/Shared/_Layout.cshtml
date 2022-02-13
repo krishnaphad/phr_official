@@ -11,26 +11,26 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">PHR</a>
+        <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm fixed-top navbar-light bg-primary  text-white border-bottom box-shadow mb-3" style="min-height:50px">
+            <div class="container-fluid">
+               <a href="#">PHR LOGO &nbsp; &nbsp; &nbsp; &nbsp;</a> @*<img class="navbar-brand" src="~/images/logo.png" min-height="1000px" width="100px" height="100px" > *@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1" style="float:right;">
+                    <ul class="navbar-nav flex-grow-1" >
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Home">Home</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Home">Home &nbsp; &nbsp;</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="AboutUs"> About Us &nbsp; &nbsp;</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Careers">Careers</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Careers">Careers &nbsp; &nbsp;</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us &nbsp; &nbsp;</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
@@ -45,14 +45,13 @@
             @RenderBody()
         </main>
     </div>
-
-       
+   
 <footer class="mainfooter bg-dark" role="contentinfo">
   <div class="footer-middle">
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-sm-6">
-        <!--Column1-->
+       
         <div class="footer-pad">
           <h4 class="white-color">Home</h4>
           <ul class="list-unstyled">
@@ -61,7 +60,7 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
-        <!--Column1-->
+        
         <div class="footer-pad">
           <h4 class="white-color">About Us</h4>
           <ul class="list-unstyled">
@@ -70,7 +69,7 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
-        <!--Column1-->
+       
         <div class="footer-pad">
           <h4 class="white-color">Contact Us</h4>
           <ul class="list-unstyled">
@@ -78,15 +77,26 @@
           </ul>
         </div>
       </div>
-    	<div class="col-md-3">
+
+      <div class="col-md-3 col-sm-6">
+        
+        <div class="footer-pad">
+          <h4 class="white-color">Follow Us</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a> &nbsp <a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a> &nbsp <a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a> &nbsp <a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
+          </ul>
+        </div>
+      </div>
+
+    	@*<div class="col-md-3 col-sm-6">
     		<h4 class="white-color">Follow Us</h4>
             <ul class="social-network social-circle">
-             <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a></li>
+             <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a> <a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a> <a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a> <a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a> </li>
              <li><a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a></li>
              <li><a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a></li>
              <li><a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
             </ul>				
-		</div>
+		</div>*@
     </div>
 	<div class="row">
 		<div class="col-md-12 copy">

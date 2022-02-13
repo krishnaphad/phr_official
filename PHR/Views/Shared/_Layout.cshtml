@@ -1,13 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using PHR.ViewModels.Login;
+@using Microsoft.AspNetCore.Http
+
+@{
+    var userDetails = PHR.Session.SessionExtensions.GetObjectFromJson<LoginDetailsViewModel>(Context.Session, "UserDetails");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Prosperspective HR Solitions</title>
+    <title> @ViewData["Title"] - PHRS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/font-awesome-icon/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/cute-alert-master/style.css" />
+    <script src="~/cute-alert-master/cute-alert.js"></script>
 </head>
 <body>
     <header>
@@ -19,7 +27,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1" style="float:right;">
+                    <ul class="navbar-nav flex-grow-1 menu-right">
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Home">Home</a>
                         </li>
@@ -35,6 +43,13 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
                         </li>
+                        @if (userDetails != null && userDetails.UserRole == "SuperAdmin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -46,58 +61,61 @@
         </main>
     </div>
 
-       
-<footer class="mainfooter bg-dark" role="contentinfo">
-  <div class="footer-middle">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-        <div class="footer-pad">
-          <h4 class="white-color">Home</h4>
-          <ul class="list-unstyled">
-            <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="Home">Home</a></li>            
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-        <div class="footer-pad">
-          <h4 class="white-color">About Us</h4>
-          <ul class="list-unstyled">
-            <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-        <div class="footer-pad">
-          <h4 class="white-color">Contact Us</h4>
-          <ul class="list-unstyled">
-            <li><a class="green-color" style="color:lightblue" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-    	<div class="col-md-3">
-    		<h4 class="white-color">Follow Us</h4>
-            <ul class="social-network social-circle">
-             <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a></li>
-             <li><a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a></li>
-             <li><a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a></li>
-             <li><a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
-            </ul>				
-		</div>
-    </div>
-	<div class="row">
-		<div class="col-md-12 copy">
-			<p class="text-center green-color">&copy; Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions. </p>
-		</div>
-	</div>
+
+    <footer class="mainfooter bg-dark" role="contentinfo">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <!--Column1-->
+                        <div class="footer-pad">
+                            <h4 class="white-color">Home</h4>
+                            <ul class="list-unstyled">
+                                <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="Home">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!--Column1-->
+                        <div class="footer-pad">
+                            <h4 class="white-color">About Us</h4>
+                            <ul class="list-unstyled">
+                                <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <!--Column1-->
+                        <div class="footer-pad">
+                            <h4 class="white-color">Contact Us</h4>
+                            <ul class="list-unstyled">
+                                <li><a class="green-color" style="color:lightblue" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="white-color">Follow Us</h4>
+                        <ul class="social-network social-circle">
+                            <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a></li>
+                            <li><a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 copy">
+                        <p class="text-center green-color">
+                            &copy; Copyright
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions.
+                        </p>
+                    </div>
+                </div>
 
 
-  </div>
-  </div>
-</footer>
+            </div>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

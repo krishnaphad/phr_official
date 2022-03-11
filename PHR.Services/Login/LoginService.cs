@@ -16,7 +16,6 @@ namespace PHR.Services.Login
         readonly phr_dbContext dbContext;
         private readonly IMapper mapper;
         private readonly ILoggerService logger;
-        //private const string SaltKey = "qGht+2u8jVLqH85L1NK3tIGeljz6zhaC+qGht+2u8jVLqH85L1NK3tIGeljz6zhaC";
         private const int SaltKey = 12;
         #endregion
 

@@ -1,0 +1,73 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<CityMasterViewModel>
+@{
+
+}
+
+<table id="cityMasterTable" class="table table-border table-bordered table-sm " cellspacing="0" width="100%">
+    <thead class="bg-primary text-center">
+        <tr>
+            <th scope="col" class="table-header">City Name</th>
+            <th scope="col" class="table-header">Status</th>
+            <th scope="col" class="table-header">Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var city in Model.List)
+        {
+            string status = city.CityIsActive ? "Active" : "In-Active";
+            <tr>
+                <td scope="row">@city.CityName</td>
+                @if (city.CityIsActive)
+                {
+                    <td scope="row" class="align-items-center">
+                        <div class="">
+                            <span class="badge bg-success rounded">@status</span>
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td scope="row" class="align-items-center">
+                        <div class="text-center">
+                            <span class="badge bg-danger rounded">@status</span>
+                        </div>
+                    </td>
+                }
+
+                <td scope="row">
+                    <label class="switch">
+                        @{
+                            string switchStatus = city.CityIsActive ? "De-Activate" : "Activate";
+                            string checkValue = city.CityIsActive == true ? "checked" : "";
+                        }
+                        <input type="checkbox" id="@city.CityName-@city.CityId" name="@city.CityName-@city.CityId" @checkValue onclick="activateDeactivateCity(@city.CityId)">
+                        <span title="@switchStatus" class="slider round"></span>
+                    </label>
+                    <a title="Edit" id="edit-@city.CityId" onclick="editCity(@city.CityId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                    <a title="Delete" id="delete-@city.CityId" onclick="deleteCity(@city.CityId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav>
+
+    @{
+        string previousBtnStatus = Model.HasPreviousPage == true ? "" : "disabled";
+        string nextBtnStatus = Model.HasNextPage == true ? "" : "disabled";
+        string cursorPrev = previousBtnStatus == "disabled" ? "no-drop" : "pointer";
+        string cursorNext = nextBtnStatus == "disabled" ? "no-drop" : "pointer";
+    }
+
+    <ul class="pagination" style="float:right;margin-top:-12px !important">
+        <li id="previousBtn" class="page-item">
+            <button class="page-link" @previousBtnStatus onclick="getCityList(@Model.PreviousPageNumber,@Model.PageSize)" tabindex="-1" style="cursor:@cursorPrev">Previous</button>
+        </li>
+        <li id="nextBtn" class="page-item">
+            <button class="page-link" @nextBtnStatus onclick="getCityList(@Model.NextPageNumber,@Model.PageSize)" style="cursor:@cursorNext">Next</button>
+            <input type="hidden" id="currentPageNo" value="@Model.PageNumber"/> 
+        </li>
+    </ul>
+    <p style="float:left; margin-top:-5px;">Showing @Model.List.Count of @Model.TotalItems records</p>
+</nav>

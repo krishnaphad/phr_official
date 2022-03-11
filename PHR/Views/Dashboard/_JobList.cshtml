@@ -1,0 +1,44 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<JobMasterViewModel>
+
+<table id="jobMasterTable" class="table table-border table-bordered table-sm " cellspacing="0" width="100%">
+    <thead class="bg-primary text-center">
+        <tr>
+            <th scope="col" class="table-header">Job Title</th>
+            <th scope="col" class="table-header">Company Name</th>
+            <th scope="col" class="table-header">Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var job in Model.List)
+        {
+            <tr>
+                <td scope="row">@job.JobTitle</td>
+                <td scope="row">@job.JobCompanyName</td>
+                <td scope="row">
+                    <a title="Edit" id="edit-@job.JobId" onclick="editJob(@job.JobId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                    <a title="Delete" id="delete-@job.JobId" onclick="deleteJob(@job.JobId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav>
+    @{
+        string previousBtnStatus = Model.HasPreviousPage == true ? "" : "disabled";
+        string nextBtnStatus = Model.HasNextPage == true ? "" : "disabled";
+        string cursorPrev = previousBtnStatus == "disabled" ? "no-drop" : "pointer";
+        string cursorNext = nextBtnStatus == "disabled" ? "no-drop" : "pointer";
+    }
+
+    <ul class="pagination" style="float:right;margin-top:-12px !important">
+        <li id="previousBtn" class="page-item">
+            <button class="page-link" @previousBtnStatus onclick="getJobsList(@Model.PreviousPageNumber,@Model.PageSize)" tabindex="-1" style="cursor:@cursorPrev">Previous</button>
+        </li>
+        <li id="nextBtn" class="page-item">
+            <button class="page-link" @nextBtnStatus onclick="getJobsList(@Model.NextPageNumber,@Model.PageSize)" style="cursor:@cursorNext">Next</button>
+            <input type="hidden" id="currentPageNo" value="@Model.PageNumber" />
+        </li>
+    </ul>
+    <p style="float:left; margin-top:-5px;">Showing @Model.List.Count of @Model.TotalItems records</p>
+</nav>

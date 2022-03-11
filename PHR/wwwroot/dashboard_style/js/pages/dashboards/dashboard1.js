@@ -1,17 +1,12 @@
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: js
-*/
+
 $(function () {
-    "use strict";
+    //"use strict";
     // ============================================================== 
     // Newsletter
     // ============================================================== 
 
     //ct-visits
-    new Chartist.Line('#ct-visits', {
+    new Chartist.Bar('#ct-visits', {
         labels: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
         series: [
             [5, 2, 7, 4, 5, 3, 5, 4]
@@ -76,6 +71,65 @@ $(function () {
         sparkResize = setTimeout(sparklineLogin, 500);
     });
     sparklineLogin();
+
+
+
+    //-------------------------------------------------------------------------------------
+
+    //var data = {
+    //    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    //    series: [
+    //        [5, 4, 3, 7, 5, 10, 7, 8, 8, 10, 6, 8],
+    //        [3, 2, 1, 5, 4, 6, 4, 6, 7, 8, 6, 4]
+    //    ]
+    //};
+
+    //var options = {
+    //    seriesBarDistance: 10,
+    //    plugins: [
+    //        Chartist.plugins.tooltip()
+    //    ],
+    //};
+
+    //var responsiveOptions = [
+    //    ['screen and (max-width: 640px)', {
+    //        seriesBarDistance: 5,
+    //        axisX: {
+    //            labelInterpolationFnc: function (value) {
+    //                return value[0];
+    //            }
+    //        }
+    //    }]
+    //];
+
+    //new Chartist.Line('#ct-visits2', data, options, responsiveOptions);
+
+
+    new Chartist.Line('#ct-visits2', {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        series: [
+            [5, 4, 3, 7, 5, 10, 7, 8, 8, 10, 6, 8],
+            [3, 2, 1, 5, 4, 6, 4, 6, 7, 8, 6, 4]
+        ]
+    }, {
+        top: 0,
+        low: 1,
+        showPoint: true,
+        fullWidth: true,
+        plugins: [
+            Chartist.plugins.tooltip()
+        ],
+        axisY: {
+            labelInterpolationFnc: function (value) {
+                return (value / 1) + 'k';
+            }
+        },
+        showArea: true
+    });
+
+    //-------------------------------------------------------------------------------------
+
+
 });
 
 

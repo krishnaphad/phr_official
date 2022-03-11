@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-#nullable disable
-
-namespace PHR.Data.Models
+namespace PHR.ViewModels.Dashboard
 {
-    public partial class JobsCollection
+    public class JobMasterViewModel
     {
-        public JobsCollection()
-        {
-            JobApplications = new HashSet<JobApplication>();
-        }
-
         public int JobId { get; set; }
         public string JobTitle { get; set; }
         public string JobDescription { get; set; }
@@ -21,10 +15,16 @@ namespace PHR.Data.Models
         public string JobSalary { get; set; }
         public string JobEducationRequired { get; set; }
         public int JobCompanyId { get; set; }
+        public string JobCompanyName { get; set; }
         public string JobLocationAddress { get; set; }
         public string JobDescriptionFileName { get; set; }
+        public string JobDescriptionFilePath { get; set; }
         public DateTime JobAddedDate { get; set; }
+    }
 
-        public virtual ICollection<JobApplication> JobApplications { get; set; }
+    public class AutoComplete
+    {
+        public string Label  { get; set; }
+        public string Value { get; set; }        
     }
 }

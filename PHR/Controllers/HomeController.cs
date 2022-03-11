@@ -53,6 +53,11 @@ namespace PHR.Controllers
         {
             return View();
         }
+
+        public IActionResult JobSearch()
+        {
+            return View();
+        }
         #endregion
     }
 }

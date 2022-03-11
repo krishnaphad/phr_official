@@ -1,28 +1,264 @@
-﻿<!DOCTYPE html>
+﻿@using PHR.ViewModels.Login;
+
+@{
+    LoginDetailsViewModel userDetails = PHR.Session.SessionExtensions.GetObjectFromJson<LoginDetailsViewModel>(Context.Session, "UserDetails");
+    string userName = userDetails != null ? userDetails.UserName : "User Name";
+    string userRole = userDetails != null ? userDetails.UserRole : "SuperAdmin";
+    //string userRole = userDetails != null ? userDetails.UserRole : "User";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PHR</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - PHRS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/dashboard_style/plugins/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="~/dashboard_style/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/dashboard_style/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/dashboard_style/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/cute-alert-master/style.css" />
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">  <!--For autocomplete textbox-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /><!--For multiselect dropdown-->
 </head>
 <body>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-
-             Copyright &copy;<script>document.write(new Date().getFullYear());</script> - All rights reserved | Prosperspective HR Solutions. 
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader" id="loader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="dashboard.html">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!-- Dark Logo icon -->
+                            <img src="~/dashboard_style/plugins/images/logo-icon.png" alt="homepage" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+                            <img src="~/dashboard_style/plugins/images/logo-text.png" alt="homepage" />
+                        </span>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                       href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class=" in">
+                            <form role="search" class="app-search d-none d-md-block me-3">
+                                <input type="text" placeholder="Search..." class="form-control mt-0">
+                                <a href="" class="active">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </form>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li>
+                            <a class="profile-pic" href="#">
+                                <img src="~/dashboard_style/plugins/images/users/varun.jpg" alt="user-img" width="36"
+                                     class="img-circle"><span class="text-white font-medium">@userName</span>
+                                </a>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- User profile and search -->
+                            <!-- ============================================================== -->
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <aside class="left-sidebar" data-sidebarbg="skin6">
+                <!-- Sidebar scroll-->
+                <div class="scroll-sidebar">
+                    <!-- Sidebar navigation-->
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav">
+                            <!-- Home -->
+                            <li class="sidebar-item pt-2">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Home" asp-action="Home"
+                                   aria-expanded="false">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <span class="hide-menu">Home</span>
+                                </a>
+                            </li>
+                            <!-- Dashboard -->
+                            <li class="sidebar-item pt-2">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="Index"
+                                   aria-expanded="false">
+                                    <i class="fa fa-dashboard" aria-hidden="true"></i>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="CityMaster"
+                                   aria-expanded="false">
+                                    @*<i class="fa fa-user" aria-hidden="true"></i>*@
+                                    <i class="fa fa-building-o"></i>
+                                    <span class="hide-menu">City Master</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="EducationMaster"
+                                   aria-expanded="false">
+                                    <i class="fa fa-book" aria-hidden="true"></i>
+                                    <span class="hide-menu">Education Master</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="KeySkillMaster"
+                                   aria-expanded="false">
+                                    <i class="fa fa-font" aria-hidden="true"></i>
+                                    <span class="hide-menu">Key Skill Master</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="CompanyMaster"
+                                   aria-expanded="false">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <span class="hide-menu">Company Master</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="JobMaster"
+                                   aria-expanded="false">
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                    <span class="hide-menu">Jobs Master</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </aside>
+            <!-- ============================================================== -->
+            <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <div class="container">
+                <main role="main" class="pb-3">
+                    <div class="page-wrapper">
+                        <div class="page-breadcrumb bg-white">
+                            <div class="row align-items-center">
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                    <h4 class="page-title">@ViewData["Title"]</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+        </div>
+
+        <footer class="footer text-center">
+            <button class="circle-div btn btn-primary"><img src="~/images/flaticon/svg/chevron-up-solid.svg" /></button>
+            <b>
+                &copy; Copyright
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions.
+            </b>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        @*<script src="~/dashboard_style/plugins/bower_components/jquery/dist/jquery.min.js"></script>*@
+        <!-- Bootstrap tether Core JavaScript -->
+        @*<script src="~/dashboard_style/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+        <script src="~/dashboard_style/js/app-style-switcher.js"></script>
+        <script src="~/dashboard_style/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <!--Wave Effects -->
+        <script src="~/dashboard_style/js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="~/dashboard_style/js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="~/dashboard_style/js/custom.js"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="~/dashboard_style/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+        <script src="~/dashboard_style/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+        <script src="~/dashboard_style/js/pages/dashboards/dashboard1.js"></script>
+        <script src="~/js/dashboard.js"></script>
+        <script src="~/js/site.js"></script>
+        <script src="~/cute-alert-master/cute-alert.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>  <!--For autocomplete textbox-->        
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script><!--For multiselect dropdown-->
+
+        <script>
+        $(document).ready(function () {
+            if ("@userRole" != "SuperAdmin") {
+                window.location.href = "/Home/Home";
+            }
+
+            $(".circle-div").click(() => {
+                $(document).scrollTop(-$(document).scrollTop());
+            })
+
+        })
+        </script>
+
+    </body>
 </html>

@@ -21,6 +21,7 @@ namespace PHR.Data.Models
         public virtual DbSet<CompanyMaster> CompanyMasters { get; set; }
         public virtual DbSet<EducationMaster> EducationMasters { get; set; }
         public virtual DbSet<ForgotPassword> ForgotPasswords { get; set; }
+        public virtual DbSet<HappyCustomer> HappyCustomers { get; set; }
         public virtual DbSet<JobApplication> JobApplications { get; set; }
         public virtual DbSet<JobsCollection> JobsCollections { get; set; }
         public virtual DbSet<KeySkillMaster> KeySkillMasters { get; set; }
@@ -31,8 +32,8 @@ namespace PHR.Data.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                
-                //optionsBuilder.UseMySQL("server=localhost;database=phr_db;user=admin;password=Pm2dmin123#;port=3306;");
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid           scaffolding   the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/ fwlink/?     linkid=2131148. For more     guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //optionsBuilder.UseMySQL("server=localhost;port=3306;user=admin;password=Pm2dmin123#;database=phr_db;");
             }
         }
 
@@ -142,6 +143,22 @@ namespace PHR.Data.Models
                     .HasColumnName("system_generated_password");
             });
 
+            modelBuilder.Entity<HappyCustomer>(entity =>
+            {
+                entity.ToTable("happy_customers");
+
+                entity.Property(e => e.HappyCustomerId).HasColumnName("happy_customer_id");
+
+                entity.Property(e => e.HappyCustomerComment)
+                    .HasMaxLength(200)
+                    .HasColumnName("happy_customer_comment");
+
+                entity.Property(e => e.HappyCustomerCompanyLogoName)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("happy_customer_company_logo_name");
+            });
+
             modelBuilder.Entity<JobApplication>(entity =>
             {
                 entity.HasKey(e => e.ApplicationId)
@@ -242,9 +259,12 @@ namespace PHR.Data.Models
                 entity.Property(e => e.JobCompanyId).HasColumnName("job_company_id");
 
                 entity.Property(e => e.JobDescription)
-                    .IsRequired()
                     .HasColumnType("varchar(5000)")
                     .HasColumnName("job_description");
+
+                entity.Property(e => e.JobDescriptionFileName)
+                    .HasMaxLength(100)
+                    .HasColumnName("job_description_file_name");
 
                 entity.Property(e => e.JobEducationRequired)
                     .IsRequired()
@@ -309,11 +329,11 @@ namespace PHR.Data.Models
 
                 entity.Property(e => e.LogMessage)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(2000)
                     .HasColumnName("log_message");
 
                 entity.Property(e => e.LogStack)
-                    .HasMaxLength(500)
+                    .HasMaxLength(2000)
                     .HasColumnName("log_stack");
             });
 

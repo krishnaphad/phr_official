@@ -51,16 +51,40 @@
                         }
 
                     </ul>
-                </div>
+                 </div>
             </div>
         </nav>
+        
     </header>
+    
+     
+    
+
     <div class="container">
         <main role="main" class="pb-3">
+            @*<div class="position-sticky">
+                <img src="~/images/sl7.jpg">
+            </div>*@
             @RenderBody()
         </main>
+
     </div>
+
+    <button class="floating-right-bottom-btn " onclick="open-side-panel()">  
+          <img src="~/images/filename.jpg" wigth="30px" height="30px" > 
+       </button>
+
+    <style>
+        .floating-right-bottom-btn
+                            {
+                              border-radius:100%;
+                             position : fixed;
+                              right : 10px;
+                              bottom : 16px;
+                            }
+    </style>
    
+
 <footer class="mainfooter bg-dark" role="contentinfo">
   <div class="footer-middle">
   <div class="container">

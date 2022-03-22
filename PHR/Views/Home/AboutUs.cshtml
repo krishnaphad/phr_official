@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "About Us";
 }
-
-  <img src="~/images/about.jpg" alt="backimage" class="img-fluid">
+  <div style="margin-top:6%;">
+    <img src="~/images/about.jpg" alt="backimage" class="img-fluid">
+</div>
 <div class="js-animsition animsition" id="site-wrap" data-animsition-in-class="fade-in" data-animsition-out-class="fade-out" style="background-color:whitesmoke;">
 
     <div class="templateux-section pt-0 pb-0">
@@ -132,13 +133,14 @@
         </div>
     </div>
 
+    
     <div class="templateux-section">
 
         <div class="container" data-aos="fade-up">
-            <div class="row">
+            <div class=""> @*class="row removed*@
                 <div class="col-lg-7">
-                    <h2 class="mb-5">About Us</h2>
-                    <div class="owl-carousel wide-slider-testimonial">
+                    <h2 class="text-center mb-5">About Us</h2>
+                    <div class="owl-carousel  wide-slider-testimonial">
                         <div class="item">
                             <img src="~/images/sl1.jpg" alt="Free template by TemplateUX.com" class="img-fluid">
                         </div>
@@ -150,7 +152,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-5 pl-lg-5">
+                @*<div class="col-lg-5 pl-lg-5">
                     <h2 class="mb-5">Why Us?</h2>
                     <div class="accordion" id="accordionExample">
 
@@ -212,42 +214,59 @@
                         </div>
 
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div> <!-- .templateux-section -->
+   
 
 
     <div class="templateux-section">
         <div class="container">
             <div class="row text-center mb-5">
                 <div class="col-12">
-                    <h2>Happy Customers</h2>
+                    <h2>Happy Customer's</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-8 testimonial-wrap">
-                    <div class="quote">&ldquo;</div>
+                   @* <div class="quote">&ldquo;</div>*@
                     <div class="owl-carousel wide-slider-testimonial">
-                        <div class="item">
-                            <blockquote class="block-testomonial">
-                                <p>&ldquo;Customer experience is the next competitive battleground.&rdquo;</p>
-
-                            </blockquote>
+                        <div >
+                            <div class=" text-center mb-5">
+                                <p>Happy customers lines will appear here......</p> &nbsp;
+                            </div>
+                            <img src="~/images/emb.png" width="5px" height="100px" class="block-testomonial">                       
                         </div>
-
                         <div class="item">
-                            <blockquote class="block-testomonial">
-                                <p>&ldquo;A satisfied customer is one who will continue to buy from you, seldom shop around, refer other customers and in general be a superstar advocate for your business.&rdquo;</p>
-
-                            </blockquote>
+                            <div class=" text-center mb-5">
+                                <p>Happy customers lines will appear here......</p> &nbsp;
+                            </div>
+                           <img src="~/images/sela.jpg" width="5px" height="100px" class="block-testomonial">
                         </div>
-
                         <div class="item">
-                            <blockquote class="block-testomonial">
-                                <p>&ldquo;The single most important thing is to make people happy. If you are making people happy, as a side effect, they will be happy to open up their wallets and pay you.&rdquo;</p>
-
-                            </blockquote>
+                            <div class=" text-center mb-5">
+                                <p>Happy customers lines will appear here..We wil add soon....</p> &nbsp;
+                            </div>
+                            <img src="~/images/arya.png" width="50px" height="100px" class="block-testomonial">
+                        </div>
+                        <div class="item">
+                            <div class=" text-center mb-5">
+                                <p>Happy customers lines will appear here... Lets try it out ...</p> &nbsp;
+                            </div>
+                            <img src="~/images/ncs.png" width="50px" height="100px" class="block-testomonial">
+                        </div>
+                        <div class="item">
+                            <div class=" text-center mb-5">
+                                <p>Happy customers lines will appear here. we are here to help you.....</p> &nbsp;
+                            </div>
+                            <img src="~/images/buck.png" width="50px" height="100px" class="block-testomonial">
+                        </div>
+                        <div class="item">
+                            <div class=" text-center mb-5">
+                                <p>Happy customers lines will appear here. happy customers will be more happy.....</p> &nbsp;
+                            </div>
+                            <img src="~/images/divr.jpg" width="50px" height="100px" class="block-testomonial">
                         </div>
                     </div>
                 </div>

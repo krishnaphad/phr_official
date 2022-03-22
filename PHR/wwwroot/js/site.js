@@ -212,3 +212,8 @@ function vaidateMobileNo(mobileNum) {
         return false;
     }
 }
+
+function open-side - panel()
+{
+
+}

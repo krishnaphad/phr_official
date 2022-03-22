@@ -647,7 +647,7 @@ namespace PHR.Controllers
                 {".doc", "application/vnd.ms-word"},
                 {".docx", "application/vnd.ms-word"},
                 {".png", "image/png"},
-                {".jpg", "image/jpeg"},
+                {".jpg", "image/jpg"},
                 {".jpeg", "image/jpeg"},
                 {".gif", "image/gif"}                
             };
@@ -672,15 +672,14 @@ namespace PHR.Controllers
             return View(customerList);
         }
 
-
         [HttpPost]
-        public JsonResult AddHappyCustomer(HappyCustomersViewModel happyCustomer)
+        public JsonResult AddHappyCustomer()
         {
             ResultViewModel result = new ResultViewModel();
 
             try
             {
-                HappyCustomersViewModel customerData = JsonConvert.DeserializeObject<HappyCustomersViewModel>(Request.Form["customerData"]);
+                HappyCustomersViewModel customerData = JsonConvert.DeserializeObject<HappyCustomersViewModel>(Request.Form["happyCustomerData"]);
                 IFormFile companyLogoFile = Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null;
                 if (companyLogoFile != null)
                 {
@@ -764,8 +763,7 @@ namespace PHR.Controllers
             }
             return PartialView("_HappyCustomersList", happyCustomerList);
         }
-
-        
+                
         [HttpGet]
         public IActionResult DownloadLogoFile(string logoFileName)
         {

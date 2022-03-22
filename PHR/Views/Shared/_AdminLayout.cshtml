@@ -22,7 +22,8 @@
     <meta name="robots" content="noindex,nofollow">
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="~/dashboard_style/plugins/images/favicon.png">
+    @*<link rel="icon" type="image/png" sizes="16x16" href="~/dashboard_style/plugins/images/favicon.png">*@
+    <link rel="icon" type="image/png" style="width:50px;height:50px;" href="~/images/logo.png">
     <!-- Custom CSS -->
     <link href="~/dashboard_style/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/dashboard_style/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
@@ -58,17 +59,19 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" asp-controller="Dashboard" asp-action="Index">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img src="~/dashboard_style/plugins/images/logo-icon.png" alt="homepage" />
+                            @*<img src="~/dashboard_style/plugins/images/logo-icon.png" alt="homepage" />*@
+                            <img src="~/images/logo.png" alt="homepage" style="width:50px;height:50px;" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="~/dashboard_style/plugins/images/logo-text.png" alt="homepage" />
+                            @*dark Logo text*@
+                            @*<img src="~/dashboard_style/plugins/images/logo-text.png" alt="homepage" />*@
+                            <img src="~/images/phradmin.PNG" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -93,14 +96,14 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class=" in">
+                        @*<li class=" in">
                             <form role="search" class="app-search d-none d-md-block me-3">
                                 <input type="text" placeholder="Search..." class="form-control mt-0">
                                 <a href="" class="active">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </form>
-                        </li>
+                        </li>*@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -148,7 +151,6 @@
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="CityMaster"
                                    aria-expanded="false">
-                                    @*<i class="fa fa-user" aria-hidden="true"></i>*@
                                     <i class="fa fa-building-o"></i>
                                     <span class="hide-menu">City Master</span>
                                 </a>
@@ -179,6 +181,13 @@
                                    aria-expanded="false">
                                     <i class="fa fa-briefcase" aria-hidden="true"></i>
                                     <span class="hide-menu">Jobs Master</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Dashboard" asp-action="HappyCustomer"
+                                   aria-expanded="false">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span class="hide-menu">Happy Customers</span>
                                 </a>
                             </li>
                         </ul>

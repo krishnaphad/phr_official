@@ -10,5 +10,6 @@ namespace PHR.ViewModels.Dashboard
         public string HappyCustomerCompanyName { get; set; }
         public string HappyCustomerComment { get; set; }
         public string HappyCustomerCompanyLogoName { get; set; }
+        public string HappyCustomerCompanyLogoPath { get; set; }        
     }
 }

@@ -1012,7 +1012,7 @@ namespace PHR.Services.Dashboard
 
             try
             {
-                var query = dbContext.CompanyMasters.ToList();
+                var query = dbContext.HappyCustomers.ToList();
                 var tempCustomer = mapper.Map<List<HappyCustomersViewModel>>(query);
 
                 pagedList = new PagedList<HappyCustomersViewModel>(

@@ -6,20 +6,27 @@
         <tr>
             <th scope="col" class="table-header">Job Title</th>
             <th scope="col" class="table-header">Company Name</th>
-            <th scope="col" class="table-header">Action</th>
+            <th scope="col" class="table-header">Actions</th>
         </tr>
     </thead>
     <tbody class="text-center">
-        @foreach (var job in Model.List)
+        @if (Model.List.Count > 0)
         {
-            <tr>
-                <td scope="row">@job.JobTitle</td>
-                <td scope="row">@job.JobCompanyName</td>
-                <td scope="row">
-                    <a title="Edit" id="edit-@job.JobId" onclick="editJob(@job.JobId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
-                    <a title="Delete" id="delete-@job.JobId" onclick="deleteJob(@job.JobId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
-                </td>
-            </tr>
+            @foreach (var job in Model.List)
+            {
+                <tr>
+                    <td scope="row">@job.JobTitle</td>
+                    <td scope="row">@job.JobCompanyName</td>
+                    <td scope="row">
+                        <a title="Edit" id="edit-@job.JobId" onclick="editJob(@job.JobId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                        <a title="Delete" id="delete-@job.JobId" onclick="deleteJob(@job.JobId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">No records found</td></tr>
         }
     </tbody>
 </table>

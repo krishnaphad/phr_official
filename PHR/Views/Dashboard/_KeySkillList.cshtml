@@ -9,45 +9,52 @@
         <tr>
             <th scope="col" class="table-header">Key Skill Name</th>
             <th scope="col" class="table-header">Status</th>
-            <th scope="col" class="table-header">Action</th>
+            <th scope="col" class="table-header">Actions</th>
         </tr>
     </thead>
     <tbody class="text-center">
-        @foreach (var skill in Model.List)
+        @if (Model.List.Count > 0)
         {
-            string status = skill.IsKeySkillActive ? "Active" : "In-Active";
-            <tr>
-                <td scope="row">@skill.KeySkillName</td>
-                @if (skill.IsKeySkillActive)
-                {
-                    <td scope="row" class="align-items-center">
-                        <div class="">
-                            <span class="badge bg-success rounded">@status</span>
-                        </div>
-                    </td>
-                }
-                else
-                {
-                    <td scope="row" class="align-items-center">
-                        <div class="text-center">
-                            <span class="badge bg-danger rounded">@status</span>
-                        </div>
-                    </td>
-                }
+            @foreach (var skill in Model.List)
+            {
+                string status = skill.IsKeySkillActive ? "Active" : "In-Active";
+                <tr>
+                    <td scope="row">@skill.KeySkillName</td>
+                    @if (skill.IsKeySkillActive)
+                    {
+                        <td scope="row" class="align-items-center">
+                            <div class="">
+                                <span class="badge bg-success rounded">@status</span>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td scope="row" class="align-items-center">
+                            <div class="text-center">
+                                <span class="badge bg-danger rounded">@status</span>
+                            </div>
+                        </td>
+                    }
 
-                <td scope="row">
-                    <label class="switch">
-                        @{
-                            string switchStatus = skill.IsKeySkillActive ? "De-Activate" : "Activate";
-                            string checkValue = skill.IsKeySkillActive == true ? "checked" : "";
-                        }
-                        <input type="checkbox" id="@skill.KeySkillName-@skill.KeySkillId" name="@skill.KeySkillName-@skill.KeySkillId" @checkValue onclick="activateDeactivateKeySkill(@skill.KeySkillId)">
-                        <span title="@switchStatus" class="slider round"></span>
-                    </label>
-                    <a title="Edit" id="edit-@skill.KeySkillId" onclick="editKeySkill(@skill.KeySkillId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
-                    <a title="Delete" id="delete-@skill.KeySkillId" onclick="deleteKeySkill(@skill.KeySkillId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
-                </td>
-            </tr>
+                    <td scope="row">
+                        <label class="switch">
+                            @{
+                                string switchStatus = skill.IsKeySkillActive ? "De-Activate" : "Activate";
+                                string checkValue = skill.IsKeySkillActive == true ? "checked" : "";
+                            }
+                            <input type="checkbox" id="@skill.KeySkillName-@skill.KeySkillId" name="@skill.KeySkillName-@skill.KeySkillId" @checkValue onclick="activateDeactivateKeySkill(@skill.KeySkillId)">
+                            <span title="@switchStatus" class="slider round"></span>
+                        </label>
+                        <a title="Edit" id="edit-@skill.KeySkillId" onclick="editKeySkill(@skill.KeySkillId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                        <a title="Delete" id="delete-@skill.KeySkillId" onclick="deleteKeySkill(@skill.KeySkillId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">No records found</td></tr>
         }
     </tbody>
 </table>

@@ -589,7 +589,7 @@ var clearJobFields = () => {
     //$("#education").select2('val', null); 
 
     $("#jobSkills").empty();
-    $("#education").empty(); 
+    $("#education").empty();
 }
 
 $("#jobMasterSubmitBtn").on("click", () => {
@@ -642,7 +642,7 @@ $("#jobMasterSubmitBtn").on("click", () => {
         errorCount += errorCount + 1;
     }
 
-    if ($("#jdFileName").text()=='') {
+    if ($("#jdFileName").text() == '') {
         var jobDescription = $("#jobDescription").val();
         if (jobDescription == "" || jobDescription == null) {
             var jdFile = $("#jdFile")[0].files[0];
@@ -804,4 +804,166 @@ var downloadJDFile = () => {
     window.location.href = "/Dashboard/DownloadJDFile?JDFileName=" + $("#jdFileName").text().split("-")[1];
 }
 //--------------------------------------------------Job Masster methods End--------------------------------------------
+
+//--------------------------------------------------Happy Customer methods Start---------------------------------------
+$(document).ready(() => {
+    $("#newHappyCustomerForm").hide();
+});
+
+$("#newHappyCustomerAddBtn").on("click", () => {
+    $("#newHappyCustomerForm").show(2000);
+    $("#newHappyCustomerAddBtn").hide(2000);
+    clearHappyCustomersFields();
+});
+
+$("#happyCustomerCancelBtn").on("click", () => {
+    $("#newHappyCustomerForm").hide(2000);
+    $("#newHappyCustomerAddBtn").show(2000);
+    clearHappyCustomersFields();
+})
+
+var clearHappyCustomersFields = () => {
+    $("#happyCustomerCompanyName").val("");
+    $("#happyCustomerCompanyNameError").text("");
+
+    $("#happyCustomerComment").val("");
+    $("#happyCustomerCommentError").text("");
+
+    $("#hcLogoFile").val("");
+    $("#hcLogoFileError").text("");
+
+    $("#happyCustomerId").val(0);
+    $("#happyCustomerSubmitBtn").text("Submit");
+
+    $("#hcLogoFileName").text("");
+    $(".imgPreview").removeAttr("src")
+}
+
+$("#happyCustomerSubmitBtn").on("click", () => {
+    var errorCount = 0;
+    var happyCustomerName = $("#happyCustomerCompanyName").val();
+    if (happyCustomerName == "" || happyCustomerName == null) {
+        $("#happyCustomerCompanyNameError").text("Happy customer's company name is required");
+        errorCount += errorCount + 1;
+    }
+
+    var happyCustomerComment = $("#happyCustomerComment").val();
+    if (happyCustomerComment == "" || happyCustomerComment == null) {
+        $("#happyCustomerCommentError").text("Happy customer's comment is required");
+        errorCount += errorCount + 1;
+    }
+
+    if ($("#hcLogoFileName").text() == '') {
+        var hcLogoFile = $("#hcLogoFile")[0].files[0];
+        if (hcLogoFile == undefined) {
+            $("#hcLogoFileError").text("Happy customer's company logo is required");
+            errorCount += errorCount + 1;
+        } else {
+            var accept = ".gif;.png;.jpg;.jpeg;";
+            if (!accept.includes(hcLogoFile.name.split('.')[1].toLowerCase())) {
+                $("#hcLogoFileError").text("Only file with extention .png,.jpg,.jpeg,.gif are allowed");
+                errorCount += errorCount + 1;
+            }            
+        }
+    } else {
+        $("#hcLogoFileName").text("- " + hcLogoFile.name);
+    }
+
+    if (errorCount > 0) {
+        return;
+    }
+
+var happyCustomerData = {
+    happyCustomerId: $("#happyCustomerId").val() == '' ? 0 : $("#happyCustomerId").val(),
+    happyCustomerCompanyName: $("#happyCustomerCompanyName").val(),
+    happyCustomerComment: $("#happyCustomerComment").val(),
+    happyCustomerCompanyLogoName: $("#hcLogoFile")[0].files[0] != undefined ? $("#hcLogoFile")[0].files[0].name : $("#hcLogoFile").text().split("-")
+};
+
+var formData = new FormData();
+    formData.append("happyCustomerData", JSON.stringify(happyCustomerData));
+    formData.append("hcLogoFile", $("#hcLogoFile")[0].files[0]);
+
+loaderShow();
+$.ajax({
+    url: "/Dashboard/AddHappyCustomer",
+    type: 'POST',
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+        LoaderHide();
+        if (result.isSuccessful == true) {
+            clearJobFields();
+            $("#newHappyCustomerForm").hide(2000);
+            $("#newHappyCustomerAddBtn").show(2000);
+            displayToastMessages("success.svg", "success", "Success", result.message);
+            getHCList($("#currentPageNo").val(), 10);
+        } else {
+            displayToastMessages("error.svg", "error", "Error", result.message);
+        }
+    },
+    error: function (err) {
+        console.log(err);
+        displayToastMessages("error.svg", "error", "Error", result.message);
+    }
+});
+})
+
+$("#hcLogoFile").on("change", () => {
+
+    var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    if (format.test($("#hcLogoFile")[0].files[0].name)) {
+        $(".imgPreview").attr("src", URL.createObjectURL($("#hcLogoFile")[0].files[0]))
+        
+    } else {
+        $("#hcLogoFileError").text("Invalid file name, please update the file name by omitting *,%,&,!,^,# symbols");
+    }
+
+    
+})
+
+function getHCList(pageNumber, pageSize) {
+    loaderShow();
+    $.get("/dashboard/GetHappyCustomers?pageNumber=" + pageNumber + "&pageSize=" + pageSize, (result) => {
+        $("#hcList").html(result);
+        LoaderHide();
+    });
+}
+
+function editHappyCustomer(hcId) {
+    if ($(document).scrollTop() > 0) {
+        $(document).scrollTop(-$(document).scrollTop());
+    }
+    
+    loaderShow();
+    $.get("/Dashboard/EditHappyCustomer?happyCustomerId=" + hcId, (result) => {
+        LoaderHide();
+        if (result.isSuccessful == true) {
+            $("#happyCustomerSubmitBtn").text("Update");
+            $("#newHappyCustomerForm").show(2000);
+            $("#newHappyCustomerAddBtn").hide(2000);
+
+            displayToastMessages("success.svg", "success", "Success", result.message);
+            $("#happyCustomerCompanyName").val(result.data.happyCustomerCompanyName);
+            $("#hcLogoFileName").text(result.data.happyCustomerCompanyLogoName);
+            $("#happyCustomerComment").val(result.data.happyCustomerComment);
+            $(".imgPreview").attr("src", window.location.origin + "/HappyCustomers/" + result.data.happyCustomerCompanyLogoName);
+            $("#happyCustomerId").val(result.data.happyCustomerId)
+        } else {
+            displayToastMessages("error.svg", "error", "Error", result.message);
+            $("#newHappyCustomerForm").hide(2000);
+            $("#newHappyCustomerAddBtn").show(2000);
+            $("#happyCustomerSubmitBtn").text("Submit");
+        }
+    })
+}
+
+var downloadHCLogo = () => {
+    window.location.href = "/Dashboard/DownloadLogoFile?logoFileName=\'" + $("#hcLogoFileName").text() + "\'";
+}
+
+
+//--------------------------------------------------Happy Customer methods End-----------------------------------------
 

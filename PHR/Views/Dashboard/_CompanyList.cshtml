@@ -9,45 +9,52 @@
         <tr>
             <th scope="col" class="table-header">Company Name</th>
             <th scope="col" class="table-header">Status</th>
-            <th scope="col" class="table-header">Action</th>
+            <th scope="col" class="table-header">Actions</th>
         </tr>
     </thead>
     <tbody class="text-center">
-        @foreach (var company in Model.List)
+        @if (Model.List.Count>0)
         {
-            string status = company.IsCompanyActive ? "Active" : "In-Active";
-            <tr>
-                <td scope="row">@company.CompanyName</td>
-                @if (company.IsCompanyActive)
-                {
-                    <td scope="row" class="align-items-center">
-                        <div class="">
-                            <span class="badge bg-success rounded">@status</span>
-                        </div>
-                    </td>
-                }
-                else
-                {
-                    <td scope="row" class="align-items-center">
-                        <div class="text-center">
-                            <span class="badge bg-danger rounded">@status</span>
-                        </div>
-                    </td>
-                }
+            @foreach (var company in Model.List)
+            {
+                string status = company.IsCompanyActive ? "Active" : "In-Active";
+                <tr>
+                    <td scope="row">@company.CompanyName</td>
+                    @if (company.IsCompanyActive)
+                    {
+                        <td scope="row" class="align-items-center">
+                            <div class="">
+                                <span class="badge bg-success rounded">@status</span>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td scope="row" class="align-items-center">
+                            <div class="text-center">
+                                <span class="badge bg-danger rounded">@status</span>
+                            </div>
+                        </td>
+                    }
 
-                <td scope="row">
-                    <label class="switch">
-                        @{
-                            string switchStatus = company.IsCompanyActive ? "De-Activate" : "Activate";
-                            string checkValue = company.IsCompanyActive == true ? "checked" : "";
-                        }
-                        <input type="checkbox" id="@company.CompanyName-@company.CompanyId" name="@company.CompanyName-@company.CompanyId" @checkValue onclick="activateDeactivateCompany(@company.CompanyId)">
-                        <span title="@switchStatus" class="slider round"></span>
-                    </label>
-                    <a title="Edit" id="edit-@company.CompanyId" onclick="editCompany(@company.CompanyId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
-                    <a title="Delete" id="delete-@company.CompanyId" onclick="deleteCompany(@company.CompanyId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
-                </td>
-            </tr>
+                    <td scope="row">
+                        <label class="switch">
+                            @{
+                                string switchStatus = company.IsCompanyActive ? "De-Activate" : "Activate";
+                                string checkValue = company.IsCompanyActive == true ? "checked" : "";
+                            }
+                            <input type="checkbox" id="@company.CompanyName-@company.CompanyId" name="@company.CompanyName-@company.CompanyId" @checkValue onclick="activateDeactivateCompany(@company.CompanyId)">
+                            <span title="@switchStatus" class="slider round"></span>
+                        </label>
+                        <a title="Edit" id="edit-@company.CompanyId" onclick="editCompany(@company.CompanyId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                        <a title="Delete" id="delete-@company.CompanyId" onclick="deleteCompany(@company.CompanyId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">No records found</td></tr>
         }
     </tbody>
 </table>

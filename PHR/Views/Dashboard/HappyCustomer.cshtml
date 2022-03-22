@@ -1,0 +1,63 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<HappyCustomersViewModel>
+@{
+    ViewData["Title"] = "Happy Customers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<button id="newHappyCustomerAddBtn" class="btn btn-primary mb-3" type="button"><i class="fa fa-plus"></i>Add New Happy Customer</button>
+<div class="row justify-content-center">
+    <form id="newHappyCustomerForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="form-label" for="happyCustomerCompanyName">Happy Customer's Company Name</label>
+                    <input type="text" id="happyCustomerCompanyName" class="form-control border-style" placeholder="Happy Customer Company Name" autocomplete="off" onkeypress="clearTheErrorMsg('happyCustomerCompanyNameError')" />
+                    <span id="happyCustomerCompanyNameError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="form-label" for="hcLogoFile">Happy Customer's Logo</label>
+                    <input type="file" id="hcLogoFile" class="form-control border-style" accept=".gif,.png,.jpg,.jpeg" />
+                    <a id="hcLogoFileName" href="javascript:void(0)" onclick="downloadHCLogo()" class="form-label"></a>
+                    <span id="hcLogoFileError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-label" for="jdFile">Logo Preview</label>
+                    <img class="imgPreview" />
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="form-label" for="happyCustomerComment">Happy Customer's Comment</label>
+                    <textarea rows="6" id="happyCustomerComment" class="form-control border-style" placeholder="Happy Customer Comment" onkeypress="clearTheErrorMsg('happyCustomerCommentError')" autocomplete="off"></textarea>
+                    <span id="happyCustomerCommentError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="happyCustomerId" />
+        <div class="pt-1 mb-5 pb-1">
+            <button id="happyCustomerSubmitBtn" class="btn btn-primary mb-3" type="button">Submit</button>
+            <button id="happyCustomerCancelBtn" class="btn btn-danger mb-3" type="button">Cancle</button>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Happy Customer's List</h3>
+            <div id="hcList">
+                <partial name="~/Views/Dashboard/_HappyCustomersList.cshtml" data="@Model" />
+            </div>
+        </div>
+    </div>
+</div>

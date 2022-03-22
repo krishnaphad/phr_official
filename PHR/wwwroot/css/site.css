@@ -237,3 +237,18 @@ input:checked + .slider:before {
     border-radius: 4px;
 }
 /*Multi select dropdown style end*/
+
+/*Happy customers logo style start*/
+.imgPreview {
+    width: 100%;
+    height: auto;
+}
+
+.companyLogo {
+    min-width: 50%;
+    min-height: 50%;
+    width:20%;
+    height:20%
+}
+
+/*Happy customers logo style end*/

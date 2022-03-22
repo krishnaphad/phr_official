@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\dashboard_style\" />
     <Folder Include="wwwroot\images\loader\" />
     <Folder Include="wwwroot\JobDescription\" />
     <Folder Include="wwwroot\HappyCustomers\" />

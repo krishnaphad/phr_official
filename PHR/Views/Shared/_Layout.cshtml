@@ -16,18 +16,19 @@
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/cute-alert-master/style.css" />
     <script src="~/cute-alert-master/cute-alert.js"></script>
+    <link rel="icon" type="image/png" href="~/images/logo.png">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm fixed-top navbar-light bg-primary  text-white border-bottom box-shadow mb-3" style="min-height:50px">
             <div class="container-fluid">
-               <a href="#">PHR LOGO &nbsp; &nbsp; &nbsp; &nbsp;</a> @*<img class="navbar-brand" src="~/images/logo.png" min-height="1000px" width="100px" height="100px" > *@
+                <a href="#">PHR LOGO &nbsp; &nbsp; &nbsp; &nbsp;</a> @*<img class="navbar-brand" src="~/images/logo.png" min-height="1000px" width="100px" height="100px" > *@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1" >
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Home">Home &nbsp; &nbsp;</a>
                         </li>
@@ -40,9 +41,13 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us &nbsp; &nbsp;</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
-                        </li>
+                        @if (userDetails == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
+                            </li>
+                        }
+
                         @if (userDetails != null && userDetails.UserRole == "SuperAdmin")
                         {
                             <li class="nav-item">
@@ -51,97 +56,113 @@
                         }
 
                     </ul>
-                 </div>
+                </div>
             </div>
         </nav>
-        
+
     </header>
-    
-     
-    
+
+
+
 
     <div class="container">
         <main role="main" class="pb-3">
             @*<div class="position-sticky">
                 <img src="~/images/sl7.jpg">
-            </div>*@
+                </div>*@
             @RenderBody()
         </main>
 
     </div>
 
-    <button class="floating-right-bottom-btn " onclick="open-side-panel()">  
-          <img src="~/images/filename.jpg" wigth="30px" height="30px" > 
-       </button>
+    <img data-toggle="modal" data-target="#sidebar-right" class="floating-right-bottom" onclick="open_side_panel()" src="~/images/filename.jpg" wigth="50px" height="50px" />
 
-    <style>
-        .floating-right-bottom-btn
-                            {
-                              border-radius:100%;
-                             position : fixed;
-                              right : 10px;
-                              bottom : 16px;
-                            }
-    </style>
-   
+    <!-- Sidebar Right -->
+    <div class="modal fade right" id="sidebar-right" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm popup-position" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4>Prosperspective HR</h4>
+                    <button type="button" class="close" data-dismiss="modal" title="Close"><span aria-hidden="true">&times;</span></button>                    
+                </div>
 
-<footer class="mainfooter bg-dark" role="contentinfo">
-  <div class="footer-middle">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6">
-       
-        <div class="footer-pad">
-          <h4 class="white-color">Home</h4>
-          <ul class="list-unstyled">
-            <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="Home">Home</a></li>            
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        
-        <div class="footer-pad">
-          <h4 class="white-color">About Us</h4>
-          <ul class="list-unstyled">
-            <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-       
-        <div class="footer-pad">
-          <h4 class="white-color">Contact Us</h4>
-          <ul class="list-unstyled">
-            <li><a class="green-color" style="color:lightblue" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
+                <div class="modal-body">
 
-      <div class="col-md-3 col-sm-6">
-        
-        <div class="footer-pad">
-          <h4 class="white-color">Follow Us</h4>
-          <ul class="list-unstyled">
-            <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a> &nbsp <a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a> &nbsp <a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a> &nbsp <a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
-          </ul>
-        </div>
-      </div>
+                    <div class="form-group hide">
+                        <div class="input-group">
+                           
+                            <input class="form-control" id="guestName" placeholder="Name *">
+                            
+                        </div>
+                    </div>
 
-    	@*<div class="col-md-3 col-sm-6">
-    		<h4 class="white-color">Follow Us</h4>
-            <ul class="social-network social-circle">
-             <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a> <a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a> <a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a> <a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a> </li>
-             <li><a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a></li>
-             <li><a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a></li>
-             <li><a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
-            </ul>				
-		</div>*@
+                    <div class="form-group has-feedback">
+                        <input class="form-control" id="email" placeholder="Email *">
+                        
+                    </div>
+                       
+                    <div>
+                        
+                         <textarea name="message" id="message" placeholder="How we can help ? *" rows="5" class="form-control"></textarea>
+                    </div>
+                    <hr>
+                    <div>
+                         <input class="btn btn-primary " type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-	<div class="row">
-		<div class="col-md-12 copy">
-			<p class="text-center green-color">&copy; Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions. </p>
-		</div>
-	</div>
+
+
+
+    <footer class="mainfooter bg-dark" role="contentinfo">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+
+                        <div class="footer-pad">
+                            <h4 class="white-color">Home</h4>
+                            <ul class="list-unstyled">
+                                <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="Home">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+
+                        <div class="footer-pad">
+                            <h4 class="white-color">About Us</h4>
+                            <ul class="list-unstyled">
+                                <li><a class="green-color" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+
+                        <div class="footer-pad">
+                            <h4 class="white-color">Contact Us</h4>
+                            <ul class="list-unstyled">
+                                <li><a class="green-color" style="color:lightblue" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6">
+
+                        <div class="footer-pad">
+                            <h4 class="white-color">Follow Us</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="#" title="Facebook" class="white-color"><i class="fab fa-facebook-square"></i></a> &nbsp <a href="#" title="Instagram" class="white-color"><i class="fab fa-instagram"></i></a> &nbsp <a href="#" title="LinkedIn" class="white-color"><i class="fab fa-linkedin"></i></a> &nbsp <a href="#" title="Twitter" class="white-color"><i class="fab fa-twitter-square"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 copy">
+                        <p class="text-center green-color">&copy; Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions. </p>
+                    </div>
+                </div>
 
 
             </div>

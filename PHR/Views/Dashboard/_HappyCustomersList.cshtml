@@ -1,0 +1,55 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<HappyCustomersViewModel>
+
+<table id="jobMasterTable" class="table table-border table-bordered table-sm " cellspacing="0" width="100%">
+    <thead class="bg-primary text-center">
+        <tr>
+            <th scope="col" class="table-header">Company Name</th>
+            <th scope="col" class="table-header">Comment</th>
+            <th scope="col" class="table-header">Logo Preview</th>
+            <th scope="col" class="table-header">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @if (Model.List.Count > 0)
+        {
+            @foreach (var customer in Model.List)
+            {
+                <tr>                    
+                    <td scope="row">@customer.HappyCustomerCompanyName</td>
+                    <td scope="row">
+                        <div id="hcComment" title="@customer.HappyCustomerComment">@customer.HappyCustomerComment</div> 
+                    </td>
+                    <td width="30%"> <img id="companyLogo" class="companyLogo" src="~/HappyCustomers/@customer.HappyCustomerCompanyLogoName" /></td>
+                    <td scope="row">
+                        <a title="Edit" id="edit-@customer.HappyCustomerId" onclick="editHappyCustomer(@customer.HappyCustomerId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                        <a title="Delete" id="delete-@customer.HappyCustomerId" onclick="deleteHappyCustomer(@customer.HappyCustomerId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">No records found</td></tr>
+        }
+    </tbody>
+</table>
+<nav>
+    @{
+        string previousBtnStatus = Model.HasPreviousPage == true ? "" : "disabled";
+        string nextBtnStatus = Model.HasNextPage == true ? "" : "disabled";
+        string cursorPrev = previousBtnStatus == "disabled" ? "no-drop" : "pointer";
+        string cursorNext = nextBtnStatus == "disabled" ? "no-drop" : "pointer";
+    }
+
+    <ul class="pagination" style="float:right;margin-top:-12px !important">
+        <li id="previousBtn" class="page-item">
+            <button class="page-link" @previousBtnStatus onclick="getHappyCustomersList(@Model.PreviousPageNumber,@Model.PageSize)" tabindex="-1" style="cursor:@cursorPrev">Previous</button>
+        </li>
+        <li id="nextBtn" class="page-item">
+            <button class="page-link" @nextBtnStatus onclick="getHappyCustomersList(@Model.NextPageNumber,@Model.PageSize)" style="cursor:@cursorNext">Next</button>
+            <input type="hidden" id="currentPageNo" value="@Model.PageNumber" />
+        </li>
+    </ul>
+    <p style="float:left; margin-top:-5px;">Showing @Model.List.Count of @Model.TotalItems records</p>
+</nav>

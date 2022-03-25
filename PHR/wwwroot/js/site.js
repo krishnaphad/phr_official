@@ -76,20 +76,23 @@ function displayToastMessages(imgName, type, title, message) {
     })
 }
 
-function actionDisplayMessage(type,title,message,confirmBtnName,cancleBtnName) {
+function actionDisplayMessage(type,title,message,confirmBtnName,cancleBtnName,img) {
+    var confitmationValue = false;
     cuteAlert({
         type: type,     //"question",
         title: title,   //"Confirm Title",
         message: message,   //"Confirm Message",
-        img:"~/cute-alert-master/img",
+        img: img,
         confirmText: confirmBtnName,    //"Okay",
         cancelText: cancleBtnName   //"Cancel"
     }).then((e) => {
-        if (e == ("Thanks")) {
+        if (e == "confirm") {
+            confitmationValue = true;
         } else {
-            alert(":-(");
+            confitmationValue = false;
         }
     })
+    return confitmationValue;
 }
 
 function showLoader() {
@@ -100,16 +103,16 @@ function hideLoader() {
     $("#loaderPopup").hide();
 }
 
-function Toast() {
+//function Toast() {
 
-    cuteToast({
-        imgName:"error.svg",
-        title:"Success",
-        type: "error", // or 'info', 'error', 'warning'
-        message: "Toast Message",
-        timer: 5000
-    })
-}
+//    cuteToast({
+//        imgName:"error.svg",
+//        title:"Success",
+//        type: "error", // or 'info', 'error', 'warning'
+//        message: "Toast Message",
+//        timer: 5000
+//    })
+//}
 
 
 $("#register").click(function (event) {
@@ -213,7 +216,11 @@ function vaidateMobileNo(mobileNum) {
     }
 }
 
-function open-side - panel()
+function open_side_panel()
 {
-
+    $(document).ready(function () {
+        $(".modal a").not(".dropdown-toggle").on("click", function () {
+            $(".modal").modal("hide");
+        });
+    });
 }

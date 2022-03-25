@@ -1,0 +1,45 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<CityMasterViewModel>
+@{
+    ViewData["Title"] = "City Master";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<button id="cityMasterAddBtn" class="btn btn-primary mb-3" type="button"><i class="fa fa-plus"></i>Add New City</button>
+
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-12">
+        <form id="cityMasterForm">
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="cityName">City Name</label>
+                <input type="text" id="cityName" class="form-control" placeholder="City Name" autocomplete="off" />
+                <span id="cityNameError" class="text-danger"></span>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="isCityActive">City Active Status</label>
+                <input type="checkbox" id="isCityActive" />
+            </div>
+            <input type="hidden" id="cityId" />
+            <div class="pt-1 mb-5 pb-1">
+                <button id="cityMasterSubmitBtn" class="btn btn-primary mb-3" type="button">Submit</button>
+                <button id="cityMasterCancelBtn" class="btn btn-danger mb-3" type="button">Cancle</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">City Master List</h3>
+            <div id="cityList">
+                <partial name="~/Views/Dashboard/_CityList.cshtml" data="@Model" />
+            </div>
+        </div>
+    </div>
+</div>
+

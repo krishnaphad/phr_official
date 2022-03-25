@@ -66,7 +66,7 @@ const cuteAlert = ({
               ? 'alert-close-circle'
               : 'alert-close-default'
           }">X</span>
-          ${img !== '' ? '<img class="alert-img" src="' + src + '/' + img + '" />' : ''}
+          ${img !== '' ? '<img class="alert-img" src="' + src + '/img/' + img + '" />' : ''}
         </div>
         <div class="alert-body">
           <span class="alert-title">${title}</span>

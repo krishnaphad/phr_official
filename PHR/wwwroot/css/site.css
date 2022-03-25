@@ -2,72 +2,75 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 
@@ -75,21 +78,21 @@ body {
 
 .white-color {
     color: white !important;
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 .green-color {
-    color:lightgreen !important;
+    color: lightgreen !important;
 }
 
-.text-color{
-    color:black;
+.text-color {
+    color: black;
 }
 
 .bg-image-hight {
-    margin-top:-120px !important;
+    margin-top: -120px !important;
     /*max-height: 800px !important;*/
-    min-height:800px;    
+    min-height: 800px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -97,19 +100,19 @@ body {
     z-index: -1;
 }
 
-.bg-color{
-    background-color:lightgray !important;
+.bg-color {
+    background-color: lightgray !important;
 }
 
 .spc {
-    white-space:pre;
+    white-space: pre;
 }
 
 
 
 
-.menu-right{
-    float:right !important;
+.menu-right {
+    float: right !important;
 }
 /* End */
 
@@ -137,7 +140,181 @@ body {
     }
 }
 /*Login Page CSS end*/
-.clintilelogo{
-    width:50%;
-    height:50%;
+
+.table-header {
+    color: white !important;
+    font-size: large !important;
+}
+
+.table-border {
+    border-color: black;
+    border-width: medium;
+    /*border-style:groove*/
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        top: 1px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+    height: 22px;
+    width: 54px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+
+.circle-div {
+    background-color: #2196F3;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    border-color: #2196F3;
+    border-bottom-style:none;
+    position: fixed;
+    bottom: 21px;
+    right: 25px;
+}
+
+/*Multi select dropdown style start*/
+.border-style {
+    border-style: solid;
+    border-color: #c2afaf;
+    border-radius: 4px;
+}
+/*Multi select dropdown style end*/
+
+/*Happy customers logo style start*/
+.imgPreview {
+    width: 100%;
+    height: auto;
+}
+
+.companyLogo {
+    min-width: 50%;
+    min-height: 50%;
+    width:20%;
+    height:20%
+}
+
+/*Happy customers logo style end*/
+
+
+
+.floating-right-bottom {
+    /* border-radius:100%;*/
+    position: fixed;
+    right: 10px;
+    bottom: 16px;
+}
+
+/*floating icon sidepanel logo and form */
+.pen body {
+    padding-top: 50px;
+}
+
+
+/* MODAL FADE LEFT RIGHT BOTTOM */
+.modal.fade:not(.in).left .modal-dialog {
+    -webkit-transform: translate3d(-25%, 0, 0);
+    transform: translate3d(-25%, 0, 0);
+}
+
+.modal.fade:not(.in).right .modal-dialog {
+    -webkit-transform: translate3d(25%, 0, 0);
+    transform: translate3d(25%, 0, 0);
+}
+
+.modal.fade:not(.in).bottom .modal-dialog {
+    -webkit-transform: translate3d(0, 25%, 0);
+    transform: translate3d(0, 25%, 0);
+}
+
+.modal.right .modal-dialog {
+    position: relative;
+    /*top: 50%;
+    right: 20%;*/
+    margin-right:100px;
+
+}
+
+/*.modal.left .modal-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}*/
+
+.modal-dialog .modal-sm {
+    max-width: 800px !important;
+}
+
+.modal-content {
+    min-height: 60vh;
+    border: 0;
+    
+}
+
+.popup-position {
+    margin-right: 100px !important;
+    margin-top: 50px !important;
+    margin-bottom: 20px !important;
+    height: 500px !important;
+}
+.sbmt{
+    left: 50px;
 }

@@ -1,0 +1,80 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<EducationMasterViewModel>
+@{
+
+}
+
+<table id="educationMasterTable" class="table table-border table-bordered table-sm " cellspacing="0" width="100%">
+    <thead class="bg-primary text-center">
+        <tr>
+            <th scope="col" class="table-header">Degree Name</th>
+            <th scope="col" class="table-header">Status</th>
+            <th scope="col" class="table-header">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @if (Model.List.Count > 0)
+        {
+            @foreach (var education in Model.List)
+            {
+                string status = education.IsEducationActive ? "Active" : "In-Active";
+                <tr>
+                    <td scope="row">@education.EducationName</td>
+                    @if (education.IsEducationActive)
+                    {
+                        <td scope="row" class="align-items-center">
+                            <div class="">
+                                <span class="badge bg-success rounded">@status</span>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td scope="row" class="align-items-center">
+                            <div class="text-center">
+                                <span class="badge bg-danger rounded">@status</span>
+                            </div>
+                        </td>
+                    }
+
+                    <td scope="row">
+                        <label class="switch">
+                            @{
+                                string switchStatus = education.IsEducationActive ? "De-Activate" : "Activate";
+                                string checkValue = education.IsEducationActive == true ? "checked" : "";
+                            }
+                            <input type="checkbox" id="@education.EducationName-@education.EducationId" name="@education.EducationName-@education.EducationId" @checkValue onclick="activateDeactivateEducation(@education.EducationId)">
+                            <span title="@switchStatus" class="slider round"></span>
+                        </label>
+                        <a title="Edit" id="edit-@education.EducationId" onclick="editEducation(@education.EducationId)"><i style="cursor:pointer;" class="fa fa-edit"></i></a>
+                        <a title="Delete" id="delete-@education.EducationId" onclick="deleteEducation(@education.EducationId)"><i style="color:red;cursor:pointer; width:50px;" class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">No records found</td></tr>
+        }
+    </tbody>
+</table>
+<nav>
+
+    @{
+        string previousBtnStatus = Model.HasPreviousPage == true ? "" : "disabled";
+        string nextBtnStatus = Model.HasNextPage == true ? "" : "disabled";
+        string cursorPrev = previousBtnStatus == "disabled" ? "no-drop" : "pointer";
+        string cursorNext = nextBtnStatus == "disabled" ? "no-drop" : "pointer";
+    }
+
+    <ul class="pagination" style="float:right;margin-top:-12px !important">
+        <li id="previousBtn" class="page-item">
+            <button class="page-link" @previousBtnStatus onclick="getEducationList(@Model.PreviousPageNumber,@Model.PageSize)" tabindex="-1" style="cursor:@cursorPrev">Previous</button>
+        </li>
+        <li id="nextBtn" class="page-item">
+            <button class="page-link" @nextBtnStatus onclick="getEducationList(@Model.NextPageNumber,@Model.PageSize)" style="cursor:@cursorNext">Next</button>
+            <input type="hidden" id="currentPageNo" value="@Model.PageNumber" />
+        </li>
+    </ul>
+    <p style="float:left; margin-top:-5px;">Showing @Model.List.Count of @Model.TotalItems records</p>
+</nav>

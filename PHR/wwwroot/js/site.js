@@ -219,3 +219,12 @@ function vaidateMobileNo(mobileNum) {
         return false;
     }
 }
+
+function open_side_panel()
+{
+    $(document).ready(function () {
+        $(".modal a").not(".dropdown-toggle").on("click", function () {
+            $(".modal").modal("hide");
+        });
+    });
+}

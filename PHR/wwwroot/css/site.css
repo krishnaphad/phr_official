@@ -252,3 +252,69 @@ input:checked + .slider:before {
 }
 
 /*Happy customers logo style end*/
+
+
+
+.floating-right-bottom {
+    /* border-radius:100%;*/
+    position: fixed;
+    right: 10px;
+    bottom: 16px;
+}
+
+/*floating icon sidepanel logo and form */
+.pen body {
+    padding-top: 50px;
+}
+
+
+/* MODAL FADE LEFT RIGHT BOTTOM */
+.modal.fade:not(.in).left .modal-dialog {
+    -webkit-transform: translate3d(-25%, 0, 0);
+    transform: translate3d(-25%, 0, 0);
+}
+
+.modal.fade:not(.in).right .modal-dialog {
+    -webkit-transform: translate3d(25%, 0, 0);
+    transform: translate3d(25%, 0, 0);
+}
+
+.modal.fade:not(.in).bottom .modal-dialog {
+    -webkit-transform: translate3d(0, 25%, 0);
+    transform: translate3d(0, 25%, 0);
+}
+
+.modal.right .modal-dialog {
+    position: relative;
+    /*top: 50%;
+    right: 20%;*/
+    margin-right:100px;
+
+}
+
+/*.modal.left .modal-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}*/
+
+.modal-dialog .modal-sm {
+    max-width: 800px !important;
+}
+
+.modal-content {
+    min-height: 60vh;
+    border: 0;
+    
+}
+
+.popup-position {
+    margin-right: 100px !important;
+    margin-top: 50px !important;
+    margin-bottom: 20px !important;
+    height: 500px !important;
+}
+.sbmt{
+    left: 50px;
+}

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using PHR.Services.EmailService;
 using PHR.Services.Logger;
 using PHR.Services.Login;
 using PHR.Session;
@@ -16,13 +20,19 @@ namespace PHR.Controllers
         #region Fields
         private readonly ILoginService loginService;
         private readonly ILoggerService logger;
+        private readonly IWebHostEnvironment environment;
+        private readonly IConfiguration configuration;
+        private readonly IEmailService emailService;
         #endregion
 
         #region Constructor
-        public LoginController(ILoginService _loginService, ILoggerService _logger)
+        public LoginController(ILoginService _loginService, ILoggerService _logger, IWebHostEnvironment _environment, IConfiguration _configuration, IEmailService _emailService)
         {
             loginService = _loginService;
             logger = _logger;
+            environment = _environment;
+            configuration = _configuration;
+            emailService = _emailService;
         }
         #endregion
 
@@ -46,7 +56,6 @@ namespace PHR.Controllers
             return Json(result);
         }
 
-       
         public IActionResult Register()
         {
             return View();
@@ -69,11 +78,51 @@ namespace PHR.Controllers
             return Json(result);
         }
 
+        [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel forgotPassword)
+        {
+            ResultViewModel resultViewModel = new ResultViewModel();
+            try
+            {
+                ForgotPasswordDataModel dataModel = new ForgotPasswordDataModel();
+                string partialPath = configuration.GetSection("EmailTemplates").GetSection("ForgotPasswordEmailPath").Value;
+                string templatePath = Path.Combine(this.environment.WebRootPath, partialPath);
+                resultViewModel = emailService.SendForgotPasswordEmail(forgotPassword, templatePath);
+
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                //result.IsSuccessful = false;
+                //result.Message = "System error occured, please try later or contact Administrator";
+            }
+            return View();
+        }
+        
+        [HttpGet]
+        public JsonResult ValidateForgotPasswordRequest(int requestId)
+        {
+            ResultViewModel result = new ResultViewModel();
+            try
+            {
+                result = loginService.ValidateForgotPasswordRequest(requestId);
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
+            }
+
+            return Json(result);
+        }
         #endregion
 
     }

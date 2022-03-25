@@ -114,6 +114,36 @@ namespace PHR.Services.Login
             return result;
         }
 
+        public ResultViewModel ValidateForgotPasswordRequest(int requestId)
+        {
+            ResultViewModel result = new ResultViewModel();
+
+            try
+            {
+                ForgotPassword forgotPassword = dbContext.ForgotPasswords.FirstOrDefault(x => x.ForgotPasswordId.Equals(requestId) && x.IsLinkActive.Equals(true));
+                if (forgotPassword != null)
+                {
+                    forgotPassword.IsLinkActive = false;
+                    dbContext.ForgotPasswords.Update(forgotPassword);
+                    dbContext.SaveChanges();
+
+                    result.IsSuccessful = true;
+                }
+                else
+                {
+                    result.IsSuccessful = false;
+                    result.Message = "This reset link has already used, please generate new link";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
+            }
+            return result;
+        }
         #endregion
     }
 }

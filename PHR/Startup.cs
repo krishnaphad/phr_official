@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PHR.Data.Models;
 using PHR.Services.Dashboard;
+using PHR.Services.EmailService;
 using PHR.Services.Logger;
 using PHR.Services.Login;
 
@@ -45,6 +46,7 @@ namespace PHR
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,10 @@
 
 // Write your JavaScript code.
 
+$(document).ready(() => {
+    $("#webLink").val(window.location.origin);
+})
+
 $("#loginButton").click(function (event) {
     errorCount = 0;
     

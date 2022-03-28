@@ -41,12 +41,15 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us &nbsp; &nbsp;</a>
                         </li>
-                        @if (userDetails == null)
+                        @*@if (userDetails == null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
                             </li>
-                        }
+                        }*@
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
+                        </li>
 
                         @if (userDetails != null && userDetails.UserRole == "SuperAdmin")
                         {

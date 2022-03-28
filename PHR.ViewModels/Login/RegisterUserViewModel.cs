@@ -29,7 +29,6 @@ namespace PHR.ViewModels.Login
         public string WebLink { get; set; }
         public string ResetLink { get; set; }
         public string Passsword { get; set; }
-        public string TempltePath { get; set; }
     }
 
     public class EmailParameters
@@ -38,5 +37,12 @@ namespace PHR.ViewModels.Login
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+    }
+
+    public class SetNewPassword
+    {
+        public int RequestId { get; set; }
+        public string NewPasswod { get; set; }
+        public string EmailId { get; set; }
     }
 }

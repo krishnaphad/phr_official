@@ -19,20 +19,27 @@
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">We are The <b>PHR</b> Team</h4>
                                 </div>
-
+                                @if (ViewBag.Success == "Success")
+                                {
+                                    <label id="errorMsg" style="color:green;">@ViewBag.Message</label>
+                                }
+                                else
+                                {
+                                    <label id="errorMsg" style="color:red;">@ViewBag.Message</label>
+                                }
                                 <form id="loginForm">
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="userEmail">Email</label>
-                                        <input type="text" id="userEmail" class="form-control" placeholder="Email Address" asp-for="UserEmail" 
-                                               onkeyup="clearErrMessage(1)" autocomplete="off"/>
+                                        <input type="text" id="userEmail" class="form-control" placeholder="Email Address" asp-for="UserEmail"
+                                               onkeyup="clearErrMessage(1)" autocomplete="off" />
                                         <span id="userEmailErr" class="text-danger"></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="userPassword">Password</label>
-                                        <input type="password" id="userPassword" class="form-control" placeholder="Password" asp-for="UserPassword" 
-                                               onkeypress="clearErrMessage(2)" autocomplete="off"/>
+                                        <input type="password" id="userPassword" class="form-control" placeholder="Password" asp-for="UserPassword"
+                                               onkeypress="clearErrMessage(2)" autocomplete="off" />
                                         <span id="userPasswordErr" class="text-danger"></span>
                                     </div>
 

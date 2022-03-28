@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PHR.Models;
+using PHR.ViewModels.Common;
 
 namespace PHR.Controllers
 {
@@ -49,8 +50,10 @@ namespace PHR.Controllers
             return View();
         }
 
-        public IActionResult ApplyNow()
+        public IActionResult ApplyNow(ResultViewModel ResultViewModel)
         {
+            ViewBag.Success = ResultViewModel.IsSuccessful ? "Success" : "Error";
+            ViewBag.Message = ResultViewModel.Message;
             return View();
         }
 

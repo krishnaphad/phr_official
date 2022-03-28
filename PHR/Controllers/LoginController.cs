@@ -89,6 +89,8 @@ namespace PHR.Controllers
         public IActionResult ForgotPassword(ForgotPasswordViewModel forgotPassword)
         {
             ResultViewModel resultViewModel = new ResultViewModel();
+            ForgotPasswordViewModel data = new ForgotPasswordViewModel();
+
             try
             {
                 ForgotPasswordDataModel dataModel = new ForgotPasswordDataModel();
@@ -96,23 +98,32 @@ namespace PHR.Controllers
                 string templatePath = Path.Combine(this.environment.WebRootPath, partialPath);
                 resultViewModel = emailService.SendForgotPasswordEmail(forgotPassword, templatePath);
 
+                ViewBag.Success = resultViewModel.IsSuccessful ? "Success" : "Error";
+                ViewBag.Message = resultViewModel.Message;
+                if (resultViewModel.IsSuccessful)
+                {
+                    TempData["EmailId"] = forgotPassword.UserEmail;
+                }
+                data.UserEmail = "";
             }
             catch (Exception ex)
             {
                 logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
-                //result.IsSuccessful = false;
-                //result.Message = "System error occured, please try later or contact Administrator";
+                ViewBag.Success = "Error";
+                ViewBag.Message = "System error occured, please try later or contact Administrator";
+                data.UserEmail = "";
             }
-            return View();
+            return View(data);
         }
         
         [HttpGet]
-        public JsonResult ValidateForgotPasswordRequest(int requestId)
+        public IActionResult ValidateForgotPasswordRequest(int requestId)
         {
             ResultViewModel result = new ResultViewModel();
             try
             {
                 result = loginService.ValidateForgotPasswordRequest(requestId);
+
             }
             catch (Exception ex)
             {
@@ -120,9 +131,48 @@ namespace PHR.Controllers
                 result.IsSuccessful = false;
                 result.Message = "System error occured, please try later or contact Administrator";
             }
-
-            return Json(result);
+            TempData["requestId"] = requestId;
+            return result.IsSuccessful? RedirectToAction("SetNewPassword", result) : RedirectToAction("ForgotPassword");
         }
+
+        [HttpGet]
+        public IActionResult SetNewPassword(ResultViewModel result)
+        {
+            ViewBag.Success = result.IsSuccessful ? "Success" : "Error";
+            ViewBag.Message = result.Message;
+            SetNewPassword data = new SetNewPassword()
+            {
+                RequestId = Convert.ToInt32(TempData["requestId"]),
+                EmailId = (string)TempData["EmailId"]
+            };
+            return View(data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateNewPassowrd(SetNewPassword password)
+        {
+            ResultViewModel resultViewModel = new ResultViewModel();
+
+            try
+            {
+                resultViewModel = loginService.SetNewPassword(password);
+                
+                if (!resultViewModel.IsSuccessful)
+                {
+                    TempData["requestId"] = password.RequestId;
+                    TempData["EmailId"] = password.EmailId;
+                }                
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                ViewBag.Success = "Error";
+                ViewBag.Message = "System error occured, please try later or contact Administrator";
+            }
+            return resultViewModel.IsSuccessful ? RedirectToAction("ApplyNow", "Home", resultViewModel) : RedirectToAction("SetNewPassword", resultViewModel);
+        }
+
         #endregion
 
     }

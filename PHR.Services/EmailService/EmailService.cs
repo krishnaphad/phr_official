@@ -50,10 +50,11 @@ namespace PHR.Services.EmailService
             {
                 ForgotPasswordDataModel dataModel = new ForgotPasswordDataModel();
 
-                var user = dbContext.LoginDetails.FirstOrDefault(u => u.UserEmail.Equals(forgotPassword.UserEmail));
+                var user = dbContext.LoginDetails.FirstOrDefault(u => u.UserEmail.ToLower().Equals(forgotPassword.UserEmail.ToLower()));
                 if (user != null)
                 {
-                    dataModel.Passsword = BCrypt.Net.BCrypt.HashPassword(GenerateSystemPassword(), SaltKey);
+                    string tempPass = GenerateSystemPassword();
+                    dataModel.Passsword = BCrypt.Net.BCrypt.HashPassword(tempPass, SaltKey);
 
                     ForgotPassword forgotData = new ForgotPassword()
                     {
@@ -68,6 +69,7 @@ namespace PHR.Services.EmailService
 
                     dataModel.WebLink = forgotPassword.WebLink + "/Login/ValidateForgotPasswordRequest?requestId=" + forgotData.ForgotPasswordId;
                     dataModel.ResetLink = dataModel.WebLink;
+                    dataModel.Passsword = tempPass;
 
                     List<KeyValuePair<string, string>> keyValues = new List<KeyValuePair<string, string>>()
                     {

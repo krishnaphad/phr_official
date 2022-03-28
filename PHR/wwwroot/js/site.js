@@ -5,6 +5,10 @@
 
 $(document).ready(() => {
     $("#webLink").val(window.location.origin);
+    setTimeout(() => {
+        $("#errorMsg").text("");
+        $("#userEmail").val("");
+    }, 3000);
 })
 
 $("#loginButton").click(function (event) {
@@ -227,4 +231,16 @@ function open_side_panel()
             $(".modal").modal("hide");
         });
     });
+}
+
+$("#userEmail").on("click", () => {
+    $("#errorMsg").text("");
+})
+
+function validateConfirmPassword() {
+    if ($("#newPassword").val() != $("#confirmPassword").val()) {
+        $("#confirmPasswordErr").text('Password doesn\'t match');
+    } else {
+        $("#confirmPasswordErr").text('');
+    }
 }

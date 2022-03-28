@@ -128,6 +128,7 @@ namespace PHR.Services.Login
                     dbContext.SaveChanges();
 
                     result.IsSuccessful = true;
+                    result.Message = "Request validated successfuly";
                 }
                 else
                 {
@@ -135,6 +136,37 @@ namespace PHR.Services.Login
                     result.Message = "This reset link has already used, please generate new link";
                 }
 
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
+            }
+            return result;
+        }
+
+        public ResultViewModel SetNewPassword(SetNewPassword password)
+        {
+            ResultViewModel result = new ResultViewModel();
+
+            try
+            {
+                LoginDetail login = dbContext.LoginDetails.FirstOrDefault(u => u.UserEmail.ToLower().Equals(password.EmailId.ToLower()));
+
+                if (login != null)
+                {
+                    login.UserPassword = BCrypt.Net.BCrypt.HashPassword(password.NewPasswod, SaltKey);
+                    dbContext.LoginDetails.Update(login);
+                    dbContext.SaveChanges();
+                    result.IsSuccessful = true;
+                    result.Message = "New password updated successfuly";
+                }
+                else
+                {
+                    result.IsSuccessful = false;
+                    result.Message = "Error occured while updating new password, please try later";
+                }
             }
             catch (Exception ex)
             {

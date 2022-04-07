@@ -173,6 +173,28 @@ namespace PHR.Controllers
             return resultViewModel.IsSuccessful ? RedirectToAction("ApplyNow", "Home", resultViewModel) : RedirectToAction("SetNewPassword", resultViewModel);
         }
 
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public IActionResult SendEnquireyEmail(EnquiryEmailDetails enquiry)
+        {
+            ResultViewModel resultViewModel = new ResultViewModel();
+
+            try
+            {
+                string partialPath = configuration.GetSection("EmailTemplates").GetSection("EnquiryEmailPath").Value;
+                string templatePath = Path.Combine(this.environment.WebRootPath, partialPath);
+                resultViewModel = emailService.SendEnquiryEmail(enquiry, templatePath);                
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                resultViewModel.IsSuccessful = false;
+                resultViewModel.Message = "System error occured, please try later or contact Administrator";
+            }
+            return Json(resultViewModel);
+        }
+
+
         #endregion
 
     }

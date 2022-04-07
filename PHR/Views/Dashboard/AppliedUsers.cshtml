@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Applied Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row justify-content-lg-start">
+    <form id="appliedJobsForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="form-label" for="appliedJobSkills">Job Skills</label>
+                    <select class="" name="appliedJobSkills[]" id="appliedJobSkills" multiple="multiple">
+                    </select>
+                    <span id="appliedJobSkillsError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="form-label" for="appliedJobSearchBtn">Action</label>
+                    <button id="appliedJobSearchBtn" class="form-control border-style btn btn-primary" type="button"><i class="fa fa-search"></i>Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Applied Candidate List</h3>
+            <div id="cityList">
+                @*<partial name="~/Views/Dashboard/_CityList.cshtml" data="@Model" />*@
+            </div>
+        </div>
+    </div>
+</div>

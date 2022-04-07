@@ -804,5 +804,17 @@ namespace PHR.Controllers
         }
         #endregion
 
+        #region Applied Users
+        public IActionResult AppliedUsers()
+        {
+            return View();
+        }
+
+        public IActionResult DashboardData()
+        {
+            return View();
+        }
+        #endregion
+
     }
 }

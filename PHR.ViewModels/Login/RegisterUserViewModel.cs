@@ -45,4 +45,11 @@ namespace PHR.ViewModels.Login
         public string NewPasswod { get; set; }
         public string EmailId { get; set; }
     }
+
+    public class EnquiryEmailDetails
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string EnquiryDetails { get; set; }
+    }
 }

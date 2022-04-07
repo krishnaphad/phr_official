@@ -1,8 +1,5 @@
 ﻿using PHR.ViewModels.Common;
 using PHR.ViewModels.Login;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PHR.Services.EmailService
 {
@@ -10,5 +7,6 @@ namespace PHR.Services.EmailService
     {
         ResultViewModel SendForgotPasswordEmail(ForgotPasswordViewModel forgotPassword, string templatePath);
         bool SendEmail(EmailParameters emailParams);
+        ResultViewModel SendEnquiryEmail(EnquiryEmailDetails enquiryEmail, string templatePath);
     }
 }

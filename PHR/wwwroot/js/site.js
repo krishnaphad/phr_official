@@ -44,8 +44,13 @@ $("#loginButton").click(function (event) {
             hideLoader();
             if (result.isSuccessful) {
                 displayToastMessages("success.svg", "success", "Success", result.message);
-                setTimeout(function(){
-                    window.location.href = "/Home/JobSearch"
+                setTimeout(function () {
+                    if (result.data.userRole == "SuperAdmin") {
+                        window.location.href = "/Home/Home"
+                    }
+                    else {
+                        window.location.href = "/Home/JobSearch"
+                    }
                 },2000);
                 
             } else {

@@ -258,8 +258,8 @@ input:checked + .slider:before {
 .floating-right-bottom {
     /* border-radius:100%;*/
     position: fixed;
-    right: 10px;
-    bottom: 16px;
+    right: 8px;
+    bottom: 25px;
 }
 
 /*floating icon sidepanel logo and form */
@@ -315,6 +315,18 @@ input:checked + .slider:before {
     margin-bottom: 20px !important;
     height: 500px !important;
 }
-.sbmt{
-    left: 50px;
+.prima-color {
+    background-color: #4caf50 !important;
 }
+
+/*contents on home image*/
+/*.container {
+    position: absolute;
+    text-align: center;
+    color: white;
+}
+.top-left {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+}*/

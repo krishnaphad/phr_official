@@ -25,4 +25,8 @@
     <Folder Include="wwwroot\HappyCustomers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\EmailTemplates\ForgotPassword.html" />
+  </ItemGroup>
+
 </Project>

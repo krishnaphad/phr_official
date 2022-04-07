@@ -21,12 +21,13 @@ namespace PHR.Controllers
         #region Fields
         private readonly ILoggerService logger;
         private readonly IDashboardService dashboardService;
-        private readonly IHostingEnvironment environment;
+        //private readonly IHostingEnvironment environment;
+        private readonly IWebHostEnvironment environment;
         private readonly IConfiguration configuration;
         #endregion
 
         #region Controller
-        public DashboardController(ILoggerService _logger, IDashboardService _dashboardServic, IHostingEnvironment _environment, IConfiguration _configuration)
+        public DashboardController(ILoggerService _logger, IDashboardService _dashboardServic, IWebHostEnvironment _environment, IConfiguration _configuration)
         {
             logger = _logger;
             dashboardService = _dashboardServic;
@@ -800,6 +801,18 @@ namespace PHR.Controllers
                 result.Message = "System error occured, please try later or contact Administrator";
             }
             return Json(result);
+        }
+        #endregion
+
+        #region Applied Users
+        public IActionResult AppliedUsers()
+        {
+            return View();
+        }
+
+        public IActionResult DashboardData()
+        {
+            return View();
         }
         #endregion
 

@@ -92,6 +92,8 @@ namespace PHR.Services.EmailService
             catch (Exception ex)
             {
                 logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
             }
 
             return result;
@@ -154,6 +156,35 @@ namespace PHR.Services.EmailService
             return isEmailSent;
         }
 
+        public ResultViewModel SendEnquiryEmail(EnquiryEmailDetails enquiryEmail, string templatePath)
+        {
+            ResultViewModel result = new ResultViewModel();
+            try
+            {
+                List<KeyValuePair<string, string>> keyValues = new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("@@Name@@", enquiryEmail.Name),
+                        new KeyValuePair<string, string>("@@Email@@", enquiryEmail.Email),
+                        new KeyValuePair<string, string>("@@Enquiry@@", enquiryEmail.EnquiryDetails)  
+                    };
+
+                EmailParameters emailParams = new EmailParameters();
+                emailParams.Body = GetEmailTemplate(keyValues, templatePath);
+                emailParams.To = fromEmail;
+                emailParams.From = fromEmail;
+                emailParams.Subject = "Enquiry Email";
+                SendEmail(emailParams);
+                result.IsSuccessful = true;
+                result.Message = "Enquiry email sent successfuly";
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
+            }
+            return result;
+        }
         #endregion
 
     }

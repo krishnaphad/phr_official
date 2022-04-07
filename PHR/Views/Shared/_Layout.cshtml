@@ -19,6 +19,14 @@
     <link rel="icon" type="image/png" href="~/images/lgo.png"  width="750px" height="80px">
 </head>
 <body>
+
+    <div class="preloader" id="loader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
     <header>
         <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm fixed-top navbar-light bg-primary text-white border-bottom box-shadow mb-3" style="min-height:50px">
             <div class="container-fluid">
@@ -41,12 +49,15 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us &nbsp; &nbsp;</a>
                         </li>
-                        @if (userDetails == null)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
-                            </li>
-                        }
+                        @*@if (userDetails == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
+                                </li>
+                            }*@
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
+                        </li>
 
                         @if (userDetails != null && userDetails.UserRole == "SuperAdmin")
                         {
@@ -55,15 +66,19 @@
                             </li>
                         }
 
+                        @if (userDetails != null)
+                        {
+                            @*<li class="nav-item" style="float:right;">
+                                Hello @userDetails.UserName
+                            </li>*@
+                        }
+                        
                     </ul>
                 </div>
             </div>
         </nav>
 
     </header>
-
-
-
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -83,32 +98,32 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4>Prosperspective HR</h4>
-                    <button type="button" class="close" data-dismiss="modal" title="Close"><span aria-hidden="true">&times;</span></button>                    
+                    <button type="button" class="close" data-dismiss="modal" title="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
 
                 <div class="modal-body">
-
-                    <div class="form-group hide">
-                        <div class="input-group">
-                           
-                            <input class="form-control" id="guestName" placeholder="Name *">
-                            
+                    <form>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <input class="form-control" id="guestName" placeholder="Name *" onkeyup="clearTheErrorMsg('1')">
+                            <span id="nameErr" class="text-danger"></span>
                         </div>
-                    </div>
 
-                    <div class="form-group has-feedback">
-                        <input class="form-control" id="email" placeholder="Email *">
-                        
-                    </div>
-                       
-                    <div>
-                        
-                         <textarea name="message" id="message" placeholder="How we can help ? *" rows="5" class="form-control"></textarea>
-                    </div>
-                    <hr>
-                    <div>
-                         <input class="btn btn-primary " type="submit" value="Submit">
-                    </div>
+                        <div class="form-group has-feedback">
+                            <input class="form-control" id="email" placeholder="Email *" onkeyup="clearTheErrorMsg('2')">
+                            <span id="emailErr" class="text-danger"></span>
+                        </div>
+
+                        <div>
+
+                            <textarea name="message" id="message" placeholder="How we can help ? *" rows="5" class="form-control" onkeyup="clearTheErrorMsg('3')"></textarea>
+                            <span id="messageErr" class="text-danger"></span>
+                        </div>
+                        <hr>
+                        <div>
+                            <input class="btn btn-primary " type="button" value="Submit" onclick="sendEnquiryEmail()">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -160,7 +175,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 copy">
-                        <p class="text-center green-color">&copy; Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions. </p>
+                        <p class="text-center green-color">
+                            &copy; Copyright
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | Prosperspective HR Solutions.
+                        </p>
                     </div>
                 </div>
 

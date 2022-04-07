@@ -2,6 +2,22 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+var loaderShow = () => {
+    $("#loader").show();
+}
+
+var LoaderHide = () => {
+    $("#loader").hide();
+}
+
+$(document).ready(() => {
+    $("#webLink").val(window.location.origin);
+    LoaderHide();
+    setTimeout(() => {
+        $("#errorMsg").text("");
+        $("#userEmail").val("");
+    }, 3000);
+})
 
 $("#loginButton").click(function (event) {
     errorCount = 0;
@@ -29,7 +45,7 @@ $("#loginButton").click(function (event) {
             if (result.isSuccessful) {
                 displayToastMessages("success.svg", "success", "Success", result.message);
                 setTimeout(function(){
-                    window.location.href = "/"
+                    window.location.href = "/Home/JobSearch"
                 },2000);
                 
             } else {
@@ -102,17 +118,6 @@ function showLoader() {
 function hideLoader() {
     $("#loaderPopup").hide();
 }
-
-//function Toast() {
-
-//    cuteToast({
-//        imgName:"error.svg",
-//        title:"Success",
-//        type: "error", // or 'info', 'error', 'warning'
-//        message: "Toast Message",
-//        timer: 5000
-//    })
-//}
 
 
 $("#register").click(function (event) {
@@ -224,3 +229,119 @@ function open_side_panel()
         });
     });
 }
+
+$("#userEmail").on("click", () => {
+    $("#errorMsg").text("");
+})
+
+function validateConfirmPassword() {
+    if ($("#newPassword").val() != $("#confirmPassword").val()) {
+        $("#confirmPasswordErr").text('Password doesn\'t match');
+    } else {
+        $("#confirmPasswordErr").text('');
+    }
+}
+
+function clearTheErrorMsg(Id) {
+    
+    if (Id == 1) {
+        $("#nameErr").text('');
+    } else if (Id == 2) {
+        if (!isEmailValid("email")) {
+            $("#emailErr").text('Please enter valid Email!');
+        } else {
+            $("#emailErr").text('');
+        }
+    } else {
+        $("#messageErr").text('');
+    }
+    
+}
+
+function sendEnquiryEmail() {
+    var name = $("#guestName").val();
+    var email = $("#email").val();
+    var enquiry = $("#message").val();
+    var count = 0;
+    if (name == "") {
+        count += 1;
+        $("#nameErr").text("Name is required");
+    }
+
+    if (email == "") {
+        count += 1;
+        $("#emailErr").text("Email is required");
+    }
+
+    if (enquiry == "") {
+        count += 1;
+        $("#messageErr").text("Enquire message is required");
+    }
+
+    if (count > 0) {
+        return;
+    }
+    var emailDetails = {
+        Name : name,
+        Email : email,
+        EnquiryDetails : enquiry
+    };
+
+
+    loaderShow();
+    //$.ajax({
+    //    url: "/Login/SendEnquireyEmail",
+    //    type: 'POST',
+    //    data: {
+    //        enquiry: emailDetails
+    //    },
+    //    dataType: "json",
+    //    contentType:"application/json",
+    //    //headers: {
+    //    //    '__RequestVerificationToken': $("input[name='__RequestVerificationToken']").val()
+    //    //},
+    //    //beforeSend: function (xhr) {
+    //    //    xhr.setRequestHeader("__RequestVerificationToken",
+    //    //        $("input[name='__RequestVerificationToken']").val());
+    //    //},
+    //    success: function (result) {
+    //        LoaderHide();
+    //        if (result.isSuccessful == true) {
+    //            //clearJobFields();
+    //            $("#guestName").val("");
+    //            $("#email").val("");
+    //            $("#message").val("");
+    //            displayToastMessages("success.svg", "success", "Success", result.message);
+    //            $(".modal").modal("hide");
+    //        } else {
+    //            displayToastMessages("error.svg", "error", "Error", result.message);
+    //        }
+    //    },
+    //    error: function (err) {   
+    //        LoaderHide();
+    //        console.log(err);
+    //        displayToastMessages("error.svg", "error", "Error", "Error occuerd, please contact ot the Administrator");
+    //    }
+    //});
+
+
+    $.post("/Login/SendEnquireyEmail", emailDetails, (result) => {
+        LoaderHide();
+        if (result.isSuccessful == true) {
+            //clearJobFields();
+            $("#guestName").val("");
+            $("#email").val("");
+            $("#message").val("");
+            displayToastMessages("success.svg", "success", "Success", result.message);
+            $(".modal").modal("hide");
+        } else {
+            displayToastMessages("error.svg", "error", "Error", result.message);
+        }
+    }).error(() => {
+        LoaderHide();
+        console.log(err);
+        displayToastMessages("error.svg", "error", "Error", "Error occuerd, please contact ot the Administrator");
+    })
+    
+}
+

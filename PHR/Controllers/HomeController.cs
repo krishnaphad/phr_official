@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PHR.Models;
+using PHR.ViewModels.Common;
+using PHR.ViewModels.Login;
+using Microsoft.AspNetCore.Http;
 
 namespace PHR.Controllers
 {
@@ -49,8 +52,16 @@ namespace PHR.Controllers
             return View();
         }
 
-        public IActionResult ApplyNow()
+        public IActionResult ApplyNow(ResultViewModel ResultViewModel)
         {
+
+            LoginDetailsViewModel userDetails = PHR.Session.SessionExtensions.GetObjectFromJson<LoginDetailsViewModel>(HttpContext.Session, "UserDetails");
+            if (userDetails != null)
+            {
+                return RedirectToAction("JobSearch");
+            }
+            ViewBag.Success = ResultViewModel.IsSuccessful ? "Success" : "Error";
+            ViewBag.Message = ResultViewModel.Message;
             return View();
         }
 

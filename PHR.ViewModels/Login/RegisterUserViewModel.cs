@@ -17,4 +17,39 @@ namespace PHR.ViewModels.Login
         public DateTime AddedDate { get; set; }
 
     }
+
+    public class ForgotPasswordViewModel
+    {
+        public string UserEmail { get; set; }
+        public string WebLink { get; set; }
+
+    }
+    public class ForgotPasswordDataModel
+    {
+        public string WebLink { get; set; }
+        public string ResetLink { get; set; }
+        public string Passsword { get; set; }
+    }
+
+    public class EmailParameters
+    {
+        public string From { get; set; }
+        public string To { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+    }
+
+    public class SetNewPassword
+    {
+        public int RequestId { get; set; }
+        public string NewPasswod { get; set; }
+        public string EmailId { get; set; }
+    }
+
+    public class EnquiryEmailDetails
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string EnquiryDetails { get; set; }
+    }
 }

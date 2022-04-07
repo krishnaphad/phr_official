@@ -10,5 +10,7 @@ namespace PHR.Services.Login
     {
         ResultViewModel ValidateCredentials(LoginCredentials credentials);
         ResultViewModel RegisterUser(RegisterUserViewModel userDetails);
+        ResultViewModel ValidateForgotPasswordRequest(int requestId);
+        ResultViewModel SetNewPassword(SetNewPassword password);
     }
 }

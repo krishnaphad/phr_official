@@ -967,3 +967,24 @@ var downloadHCLogo = () => {
 
 //--------------------------------------------------Happy Customer methods End-----------------------------------------
 
+//------------------------------Applied Jobs------------------------------------
+$(document).ready(() => {
+    getSkillsData();
+});
+
+
+var getSkillsData = () => {
+    $.get("/Dashboard/GetFormData", (result) => {
+        result.data.skillList.forEach(s => $("#appliedJobSkills").append("<option value='" + s.value + "'>" + s.label + "<option>"));
+        $("#appliedJobSkills").select2({
+            dropdownAutoWidth: true,
+            width: '100%'
+        });
+    })
+}
+
+$("#appliedJobSearchBtn").on("click", () => {
+    displayToastMessages("error.svg", "error", "Error", "No applied job records found to display");
+})
+
+//-----------------------------End Applied Jobs---------------------------------

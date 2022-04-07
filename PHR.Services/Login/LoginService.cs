@@ -114,6 +114,68 @@ namespace PHR.Services.Login
             return result;
         }
 
+        public ResultViewModel ValidateForgotPasswordRequest(int requestId)
+        {
+            ResultViewModel result = new ResultViewModel();
+
+            try
+            {
+                ForgotPassword forgotPassword = dbContext.ForgotPasswords.FirstOrDefault(x => x.ForgotPasswordId.Equals(requestId) && x.IsLinkActive.Equals(true));
+                if (forgotPassword != null)
+                {
+                    forgotPassword.IsLinkActive = false;
+                    dbContext.ForgotPasswords.Update(forgotPassword);
+                    dbContext.SaveChanges();
+
+                    result.IsSuccessful = true;
+                    result.Message = "Request validated successfuly";
+                }
+                else
+                {
+                    result.IsSuccessful = false;
+                    result.Message = "This reset link has already used, please generate new link";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
+            }
+            return result;
+        }
+
+        public ResultViewModel SetNewPassword(SetNewPassword password)
+        {
+            ResultViewModel result = new ResultViewModel();
+
+            try
+            {
+                LoginDetail login = dbContext.LoginDetails.FirstOrDefault(u => u.UserEmail.ToLower().Equals(password.EmailId.ToLower()));
+
+                if (login != null)
+                {
+                    login.UserPassword = BCrypt.Net.BCrypt.HashPassword(password.NewPasswod, SaltKey);
+                    dbContext.LoginDetails.Update(login);
+                    dbContext.SaveChanges();
+                    result.IsSuccessful = true;
+                    result.Message = "New password updated successfuly";
+                }
+                else
+                {
+                    result.IsSuccessful = false;
+                    result.Message = "Error occured while updating new password, please try later";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Logger(ex.Message + " " + (ex.InnerException != null ? ex.InnerException.Message : ""), ex.StackTrace);
+                result.IsSuccessful = false;
+                result.Message = "System error occured, please try later or contact Administrator";
+            }
+            return result;
+        }
         #endregion
     }
 }

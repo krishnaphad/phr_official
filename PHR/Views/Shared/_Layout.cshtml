@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/cute-alert-master/style.css" />
     <script src="~/cute-alert-master/cute-alert.js"></script>
-    <link rel="icon" type="image/png" href="~/images/lgo.png"  width="750px" height="80px">
+    <link rel="icon" type="image/png" href="~/images/lgo.png" width="100%" height="auto">
 </head>
 <body>
 
@@ -27,8 +27,8 @@
         </div>
     </div>
 
-    <header>
-        <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm fixed-top navbar-light bg-primary text-white border-bottom box-shadow mb-3" style="min-height:50px">
+    <header style="min-height:30px">
+        <nav class="navbar navbar-expand-sm primary navbar-toggleable-sm fixed-top navbar-light bg-info text-white border-bottom box-shadow mb-3" style="min-height:50px">
             <div class="container-fluid">
                 <a href="#"><img src="~/images/lgo.png" width="80px" height="80px" alt="backimage" class="img-fluid">  &nbsp; &nbsp; &nbsp; &nbsp;</a> @*<img class="navbar-brand" src="~/images/logo.png" min-height="1000px" width="100px" height="100px" > *@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -49,15 +49,12 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us &nbsp; &nbsp;</a>
                         </li>
-                        @*@if (userDetails == null)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
-                                </li>
-                            }*@
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
-                        </li>
+                        @if (userDetails == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ApplyNow">Apply Now</a>
+                            </li>
+                        }
 
                         @if (userDetails != null && userDetails.UserRole == "SuperAdmin")
                         {
@@ -66,19 +63,18 @@
                             </li>
                         }
 
-                        @if (userDetails != null)
-                        {
-                            @*<li class="nav-item" style="float:right;">
-                                Hello @userDetails.UserName
-                            </li>*@
-                        }
-                        
                     </ul>
                 </div>
             </div>
         </nav>
 
     </header>
+
+                  @*<div class="logg">
+                        <a asp-area="" asp-controller="Home" asp-action="Logout">Logout<img src="~/images/lgn.png" width=20px; height=20px; alt="Image" class="img-fluid"> </a>
+                    </div>*@
+
+
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -90,7 +86,9 @@
 
     </div>
 
-    <img data-toggle="modal" data-target="#sidebar-right" class="floating-right-bottom" onclick="open_side_panel()" src="~/images/popmsg.png" wigth="50px" height="50px" />
+    <a data-toggle="modal" data-target="#sidebar-right" class="floating-right-bottom" onclick="open_side_panel()"> <img src="~/images/popmsg.png" wigth="70px" height="70px"></a>
+
+    @*<img data-toggle="modal" data-target="#sidebar-right" class="floating-right-bottom" onclick="open_side_panel()" src="~/images/popmsg.png" wigth="70px" height="70px" />*@
 
     <!-- Sidebar Right -->
     <div class="modal fade right" id="sidebar-right" tabindex="-1" role="dialog">

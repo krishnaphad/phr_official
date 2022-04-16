@@ -67,6 +67,11 @@ namespace PHR.Controllers
 
         public IActionResult JobSearch()
         {
+            LoginDetailsViewModel userDetails = PHR.Session.SessionExtensions.GetObjectFromJson<LoginDetailsViewModel>(HttpContext.Session, "UserDetails");
+            if (userDetails == null)
+            {
+                return RedirectToAction("ApplyNow");
+            }
             return View();
         }
         #endregion

@@ -1,0 +1,43 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<CompanyMasterViewModel>
+@{
+    ViewData["Title"] = "Compan Master";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<button id="companyMasterAddBtn" class="btn btn-primary mb-3" type="button"><i class="fa fa-plus"></i>Add New Company</button>
+
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-12">
+        <form id="companyMasterForm">
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="companyName">Company Name</label>
+                <input type="text" id="companyName" class="form-control" placeholder="Company Name" autocomplete="off" />
+                <span id="companyNameError" class="text-danger"></span>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="isCompanyActive">Company Active Status</label>
+                <input type="checkbox" id="isCompanyActive" />
+            </div>
+            <input type="hidden" id="companyId" />
+            <div class="pt-1 mb-5 pb-1">
+                <button id="companyMasterSubmitBtn" class="btn btn-primary mb-3" type="button">Submit</button>
+                <button id="companyMasterCancelBtn" class="btn btn-danger mb-3" type="button">Cancle</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Company Master List</h3>
+            <div id="companyList">
+                <partial name="~/Views/Dashboard/_CompanyList.cshtml" data="@Model" />
+            </div>
+        </div>
+    </div>
+</div>

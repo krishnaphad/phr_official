@@ -1,0 +1,121 @@
+﻿@using PHR.ViewModels.Dashboard
+@model PHR.Services.CommonFunctions.PagedList<JobMasterViewModel>
+@{
+    ViewData["Title"] = "Job Master";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<button id="newJobAddBtn" class="btn btn-primary mb-3" type="button"><i class="fa fa-plus"></i>Add New Job</button>
+<div class="row justify-content-center">
+    <form id="newJobForm">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-label" for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" class="form-control border-style" placeholder="Job Title" autocomplete="off" onkeypress="clearTheErrorMsg('jobTitleError')" />
+                    <span id="jobTitleError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="form-label" for="jobSkills">Required Skills</label>
+                    <select class="" name="jobSkills[]" id="jobSkills" multiple="multiple">
+                    </select>
+                    <span id="jobSkillsError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-label" for="jobExperiance">Exeperiance</label>
+                    <input type="text" id="jobExperiance" class="form-control border-style" placeholder="Eg. 3 year or 0-3 years" autocomplete="off" onkeypress="clearTheErrorMsg('jobExperianceError')" />
+                    <span id="jobExperianceError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="form-label" for="education">Education</label>
+                    <select class="" name="education[]" id="education" multiple="multiple">
+                    </select>
+                    <span id="educationError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-label" for="salary">Salary</label>
+                    <input type="text" id="salary" class="form-control border-style" placeholder="Eg. 2L or 2Lac" autocomplete="off" onkeypress="clearTheErrorMsg('salaryError')" />
+                    <span id="salaryError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="form-label" for="jobCity">Job City</label>
+                    <input type="text" id="jobCity" class="form-control border-style" placeholder="Job City" autocomplete="off" onkeypress="clearTheErrorMsg('jobCityError')" />
+                    <span id="jobCityError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-label" for="companyName">Company Name</label>
+                    <input type="text" id="companyName" class="form-control border-style" placeholder="Company Name" autocomplete="off" onkeypress="clearTheErrorMsg('companyNameError')" />
+                    <span id="companyNameError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="form-label" for="companyAddress">Company Address</label>
+                    <input type="text" rows="2" id="companyAddress" class="form-control border-style" placeholder="Company Address" autocomplete="off" onkeypress="clearTheErrorMsg('companyAddressError')" />
+                    <span id="companyAddressError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-label" for="jdFile">Job Description File</label>
+                    <input type="file" id="jdFile" class="form-control border-style" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+                    <a id="jdFileName" href="javascript:void(0)" onclick="downloadJDFile()" class="form-label"></a>
+                    <span id="jdFileError" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <label class="form-label" for="jobDescription">Job Description</label>
+                    <textarea rows="6" id="jobDescription" class="form-control border-style" placeholder="Job Description" onkeypress="clearTheErrorMsg('jobDescriptionError')" autocomplete="off"></textarea>
+                    <span id="jobDescriptionError" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="jobId" />
+        <div class="pt-1 mb-5 pb-1">
+            <button id="jobMasterSubmitBtn" class="btn btn-primary mb-3" type="button">Submit</button>
+            <button id="jobMasterCancelBtn" class="btn btn-danger mb-3" type="button">Cancle</button>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Jobs List</h3>
+            <div id="jobList">
+                <partial name="~/Views/Dashboard/_JobList.cshtml" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -165,6 +165,7 @@ namespace PHR.Services.EmailService
                     {
                         new KeyValuePair<string, string>("@@Name@@", enquiryEmail.Name),
                         new KeyValuePair<string, string>("@@Email@@", enquiryEmail.Email),
+                        new KeyValuePair<string, string>("@@Mobile@@", enquiryEmail.Mobile),
                         new KeyValuePair<string, string>("@@Enquiry@@", enquiryEmail.EnquiryDetails)  
                     };
 

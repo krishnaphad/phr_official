@@ -1,18 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿
 var loaderShow = () => {
     $("#loader").show();
 }
 
-var LoaderHide = () => {
+var loaderHide = () => {
     $("#loader").hide();
 }
 
 $(document).ready(() => {
     $("#webLink").val(window.location.origin);
-    LoaderHide();
+    loaderHide();
     setTimeout(() => {
         $("#errorMsg").text("");
         $("#userEmail").val("");
@@ -21,7 +18,7 @@ $(document).ready(() => {
 
 $("#loginButton").click(function (event) {
     errorCount = 0;
-    
+
     if ($("#userEmail").val() == '') {
         $("#userEmailErr").text('Email is required!');
         errorCount += 1;
@@ -35,13 +32,13 @@ $("#loginButton").click(function (event) {
     if (errorCount > 0) {
         return event.preventDefault();
     }
-    showLoader();
+    loaderShow();
     $.ajax({
-        url:'/Login/ValidateLoginDetails',
+        url: '/Login/ValidateLoginDetails',
         type: 'POST',
         data: $('#loginForm').serialize(),
         success: function (result) {
-            hideLoader();
+            loaderHide();
             if (result.isSuccessful) {
                 displayToastMessages("success.svg", "success", "Success", result.message);
                 setTimeout(function () {
@@ -51,14 +48,14 @@ $("#loginButton").click(function (event) {
                     else {
                         window.location.href = "/Home/JobSearch"
                     }
-                },2000);
-                
+                }, 2000);
+
             } else {
                 displayToastMessages("error.svg", "error", "Error", result.message);
-            }            
+            }
         },
         error: function () {
-            hideLoader();
+            loaderHide();
         }
     });
 
@@ -81,8 +78,8 @@ function clearErrMessage(id) {
             $("#userEmailErr").text('Please enter valid Email!');
         } else {
             $("#userEmailErr").text('');
-        }        
-    } else if (id==2) {
+        }
+    } else if (id == 2) {
         $("#userPasswordErr").text('');
     }
 }
@@ -97,7 +94,7 @@ function displayToastMessages(imgName, type, title, message) {
     })
 }
 
-function actionDisplayMessage(type,title,message,confirmBtnName,cancleBtnName,img) {
+function actionDisplayMessage(type, title, message, confirmBtnName, cancleBtnName, img) {
     var confitmationValue = false;
     cuteAlert({
         type: type,     //"question",
@@ -163,13 +160,15 @@ $("#register").click(function (event) {
         return event.preventDefault();
     }
 
-    showLoader();
+    //showLoader();
+    loaderShow();
     $.ajax({
         url: '/Login/Register',
         type: 'POST',
         data: $('#userRegistration').serialize(),
         success: function (result) {
-            hideLoader();
+            //hideLoader();
+            loaderHide();
             if (result.isSuccessful) {
                 displayToastMessages("success.svg", "success", "Success", result.message);
                 setTimeout(function () {
@@ -181,7 +180,7 @@ $("#register").click(function (event) {
             }
         },
         error: function () {
-            hideLoader();
+            loaderHide();
         }
     });
 })
@@ -226,8 +225,7 @@ function vaidateMobileNo(mobileNum) {
     }
 }
 
-function open_side_panel()
-{
+function open_side_panel() {
     $(document).ready(function () {
         $(".modal a").not(".dropdown-toggle").on("click", function () {
             $(".modal").modal("hide");
@@ -248,7 +246,7 @@ function validateConfirmPassword() {
 }
 
 function clearTheErrorMsg(Id) {
-    
+
     if (Id == 1) {
         $("#nameErr").text('');
     } else if (Id == 2) {
@@ -257,16 +255,23 @@ function clearTheErrorMsg(Id) {
         } else {
             $("#emailErr").text('');
         }
-    } else {
+    } else if (Id == 3) {
+        if (!vaidateMobileNo($("#mobileNo").val())) {
+            $("#mobileNoErr").text('Please enter valid Mobile number!');
+        } else {
+            $("#mobileNoErr").text('');
+        }
+    }
+    else {
         $("#messageErr").text('');
     }
-    
 }
 
 function sendEnquiryEmail() {
     var name = $("#guestName").val();
     var email = $("#email").val();
     var enquiry = $("#message").val();
+    var mobile = $("#mobileNo").val();
     var count = 0;
     if (name == "") {
         count += 1;
@@ -280,73 +285,44 @@ function sendEnquiryEmail() {
 
     if (enquiry == "") {
         count += 1;
-        $("#messageErr").text("Enquire message is required");
+        $("#messageErr").text("Enquiry message is required");
+    }
+
+    if (mobile == "") {
+        count += 1;
+        $("#mobileNoErr").text("Mobile number is required");
     }
 
     if (count > 0) {
         return;
     }
     var emailDetails = {
-        Name : name,
-        Email : email,
-        EnquiryDetails : enquiry
+        Name: name,
+        Email: email,
+        Mobile: mobile,
+        EnquiryDetails: enquiry
     };
 
-
     loaderShow();
-    //$.ajax({
-    //    url: "/Login/SendEnquireyEmail",
-    //    type: 'POST',
-    //    data: {
-    //        enquiry: emailDetails
-    //    },
-    //    dataType: "json",
-    //    contentType:"application/json",
-    //    //headers: {
-    //    //    '__RequestVerificationToken': $("input[name='__RequestVerificationToken']").val()
-    //    //},
-    //    //beforeSend: function (xhr) {
-    //    //    xhr.setRequestHeader("__RequestVerificationToken",
-    //    //        $("input[name='__RequestVerificationToken']").val());
-    //    //},
-    //    success: function (result) {
-    //        LoaderHide();
-    //        if (result.isSuccessful == true) {
-    //            //clearJobFields();
-    //            $("#guestName").val("");
-    //            $("#email").val("");
-    //            $("#message").val("");
-    //            displayToastMessages("success.svg", "success", "Success", result.message);
-    //            $(".modal").modal("hide");
-    //        } else {
-    //            displayToastMessages("error.svg", "error", "Error", result.message);
-    //        }
-    //    },
-    //    error: function (err) {   
-    //        LoaderHide();
-    //        console.log(err);
-    //        displayToastMessages("error.svg", "error", "Error", "Error occuerd, please contact ot the Administrator");
-    //    }
-    //});
-
 
     $.post("/Login/SendEnquireyEmail", emailDetails, (result) => {
-        LoaderHide();
+        loaderHide();
         if (result.isSuccessful == true) {
-            //clearJobFields();
             $("#guestName").val("");
             $("#email").val("");
+            $("#mobleNo").val("");
             $("#message").val("");
             displayToastMessages("success.svg", "success", "Success", result.message);
             $(".modal").modal("hide");
+            $(".modal-backdrop").remove()
         } else {
             displayToastMessages("error.svg", "error", "Error", result.message);
         }
     }).error(() => {
-        LoaderHide();
+        loaderHide();
         console.log(err);
-        displayToastMessages("error.svg", "error", "Error", "Error occuerd, please contact ot the Administrator");
+        displayToastMessages("error.svg", "error", "Error", "Error occuerd, please contact the Administrator");
     })
-    
+
 }
 

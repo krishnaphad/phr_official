@@ -105,17 +105,21 @@
                     <form>
                         @Html.AntiForgeryToken()
                         <div class="form-group">
-                            <input class="form-control" id="guestName" placeholder="Name *" onkeyup="clearTheErrorMsg('1')">
+                            <input class="form-control" id="guestName" placeholder="Name *" onkeyup="clearTheErrorMsg('1')" autocomplete="off">
                             <span id="nameErr" class="text-danger"></span>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <input class="form-control" id="email" placeholder="Email *" onkeyup="clearTheErrorMsg('2')">
+                            <input class="form-control" id="email" placeholder="Email *" onkeyup="clearTheErrorMsg('2')" autocomplete="off">
                             <span id="emailErr" class="text-danger"></span>
                         </div>
 
-                        <div>
+                        <div class="form-group has-feedback">
+                            <input class="form-control" id="mobileNo" placeholder="Mobile *" onkeyup="clearTheErrorMsg('3')" autocomplete="off">
+                            <span id="mobileNoErr" class="text-danger"></span>
+                        </div>
 
+                        <div>
                             <textarea name="message" id="message" placeholder="How we can help ? *" rows="5" class="form-control" onkeyup="clearTheErrorMsg('3')"></textarea>
                             <span id="messageErr" class="text-danger"></span>
                         </div>
